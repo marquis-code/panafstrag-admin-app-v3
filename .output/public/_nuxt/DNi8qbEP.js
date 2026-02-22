@@ -1,1 +1,0 @@
-import{U as o,p as i}from"./D2ZHngAM.js";import{u as r}from"./plYuQU7E.js";import"./CjkzigEY.js";const d=o((e,a)=>{const{isLoggedIn:t}=r();if(!t.value&&!["/login","/register"].includes(e.path))return i("/login")});export{d as default};
