@@ -14,11 +14,15 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 interface _GlobalComponents {
-  ChatWidget: typeof import("../../app/components/ChatWidget.vue")['default']
-  HeroSection: typeof import("../../app/components/HeroSection.vue")['default']
-  Logo: typeof import("../../app/components/Logo.vue")['default']
-  MediaUpload: typeof import("../../app/components/MediaUpload.vue")['default']
-  Modal: typeof import("../../app/components/Modal.vue")['default']
+  ChatWidget: typeof import("../../components/ChatWidget.vue")['default']
+  ConfirmModal: typeof import("../../components/ConfirmModal.vue")['default']
+  EmptyState: typeof import("../../components/EmptyState.vue")['default']
+  HeroSection: typeof import("../../components/HeroSection.vue")['default']
+  LoadingState: typeof import("../../components/LoadingState.vue")['default']
+  Logo: typeof import("../../components/Logo.vue")['default']
+  MediaUpload: typeof import("../../components/MediaUpload.vue")['default']
+  Modal: typeof import("../../components/Modal.vue")['default']
+  UiToast: typeof import("../../components/ui/Toast.vue")['default']
   NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   NuxtLayout: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
   NuxtErrorBoundary: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -42,11 +46,15 @@ interface _GlobalComponents {
   Html: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
   Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-  LazyChatWidget: LazyComponent<typeof import("../../app/components/ChatWidget.vue")['default']>
-  LazyHeroSection: LazyComponent<typeof import("../../app/components/HeroSection.vue")['default']>
-  LazyLogo: LazyComponent<typeof import("../../app/components/Logo.vue")['default']>
-  LazyMediaUpload: LazyComponent<typeof import("../../app/components/MediaUpload.vue")['default']>
-  LazyModal: LazyComponent<typeof import("../../app/components/Modal.vue")['default']>
+  LazyChatWidget: LazyComponent<typeof import("../../components/ChatWidget.vue")['default']>
+  LazyConfirmModal: LazyComponent<typeof import("../../components/ConfirmModal.vue")['default']>
+  LazyEmptyState: LazyComponent<typeof import("../../components/EmptyState.vue")['default']>
+  LazyHeroSection: LazyComponent<typeof import("../../components/HeroSection.vue")['default']>
+  LazyLoadingState: LazyComponent<typeof import("../../components/LoadingState.vue")['default']>
+  LazyLogo: LazyComponent<typeof import("../../components/Logo.vue")['default']>
+  LazyMediaUpload: LazyComponent<typeof import("../../components/MediaUpload.vue")['default']>
+  LazyModal: LazyComponent<typeof import("../../components/Modal.vue")['default']>
+  LazyUiToast: LazyComponent<typeof import("../../components/ui/Toast.vue")['default']>
   LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   LazyNuxtLayout: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
   LazyNuxtErrorBoundary: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
