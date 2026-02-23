@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <aside 
       v-if="!route.meta.hideSidebar"
-      class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 p-8 transform transition-transform duration-300 lg:relative lg:translate-x-0"
+      class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 p-8 transform transition-transform duration-300 lg:relative lg:translate-x-0 overflow-y-auto custom-scrollbar"
       :class="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
     >
       <div class="flex items-center justify-between mb-16 px-2">
@@ -15,7 +15,7 @@
         </button>
       </div>
 
-      <nav class="space-y-2">
+      <nav class="space-y-2 pb-12">
         <NuxtLink 
           v-for="item in navItems" 
           :key="item.path" 
@@ -28,15 +28,6 @@
           {{ item.label }}
         </NuxtLink>
       </nav>
-
-      <div class="absolute bottom-12 left-8 right-8">
-        <button @click="showLogoutModal = true" class="flex items-center gap-4 px-6 py-4 w-full rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 hover:text-black hover:bg-gray-50 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-          </svg>
-          LOGOUT
-        </button>
-      </div>
     </aside>
 
     <!-- Overlay -->
@@ -65,10 +56,48 @@
             <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
             <span class="text-[9px] font-black uppercase tracking-widest">Network Online</span>
           </div>
-          <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
-             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+          
+          <!-- Profile Dropdown -->
+          <div class="relative" ref="dropdownRef">
+            <button 
+              @click="isProfileOpen = !isProfileOpen"
+              class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200 hover:border-black transition-all overflow-hidden"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </button>
+
+            <Transition
+              enter-active-class="transition duration-200 ease-out"
+              enter-from-class="transform scale-95 opacity-0 translate-y-2"
+              enter-to-class="transform scale-100 opacity-100 translate-y-0"
+              leave-active-class="transition duration-150 ease-in"
+              leave-from-class="transform scale-100 opacity-100 translate-y-0"
+              leave-to-class="transform scale-95 opacity-0 translate-y-2"
+            >
+              <div v-if="isProfileOpen" class="absolute right-0 mt-4 w-64 bg-white border border-gray-100 shadow-2xl rounded-2xl py-6 z-50">
+                <div class="px-6 pb-6 border-b border-gray-50 mb-4">
+                  <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Authenticated Admin</p>
+                  <p class="text-xs font-black uppercase tracking-tight truncate">{{ user?.email || 'Administrator' }}</p>
+                </div>
+                
+                <div class="space-y-1">
+                  <button @click="isProfileOpen = false" class="w-full flex items-center gap-4 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-black hover:bg-gray-50 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    View Account
+                  </button>
+                  <button @click="triggerLogout" class="w-full flex items-center gap-4 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-600 hover:bg-red-50 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Logout Session
+                  </button>
+                </div>
+              </div>
+            </Transition>
           </div>
         </div>
       </header>
@@ -98,14 +127,30 @@
 
 <script setup>
 import { useUser } from "@/composables/modules/auth/user";
-const { logOut } = useUser();
+const { logOut, user } = useUser();
 const isSidebarOpen = ref(false)
+const isProfileOpen = ref(false)
 const showLogoutModal = ref(false)
 const route = useRoute()
+const dropdownRef = ref(null)
 
 const handleLogout = () => {
   showLogoutModal.value = false
   logOut()
+}
+
+const triggerLogout = () => {
+  isProfileOpen.value = false
+  showLogoutModal.value = true
+}
+
+// Close dropdown on click outside
+if (process.client) {
+  window.addEventListener('click', (e) => {
+    if (dropdownRef.value && !dropdownRef.value.contains(e.target)) {
+      isProfileOpen.value = false
+    }
+  })
 }
 
 const navItems = [
@@ -115,6 +160,15 @@ const navItems = [
     icon: defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
         h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z' })
+      ])
+    })
+  },
+  { 
+    label: 'Home Content', 
+    path: '/home-content',
+    icon: defineComponent({
+      render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
+        h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' })
       ])
     })
   },
@@ -218,8 +272,8 @@ const navItems = [
       ])
     })
   },
-  {
-    label: 'Bot Config',
+  { 
+    label: 'Bot Config', 
     path: '/bot-config',
     icon: defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
@@ -227,8 +281,8 @@ const navItems = [
       ])
     })
   },
-  {
-    label: 'Audit Trail',
+  { 
+    label: 'Audit Trail', 
     path: '/audit-trail',
     icon: defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
@@ -238,3 +292,19 @@ const navItems = [
   }
 ]
 </script>
+
+<style>
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e5e5e5;
+}
+</style>

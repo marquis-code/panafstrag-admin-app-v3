@@ -1,4 +1,4 @@
-import { GATEWAY_ENDPOINT } from '../axios.config';
+import { GATEWAY_ENDPOINT } from '@/api_factory/axios.config';
 
 export const admin_api = {
   getStats: () => {
