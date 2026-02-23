@@ -28,10 +28,38 @@ const form = reactive({
   uploadedVideoUrl: '',
   zoomMeetingUrl: '',
   status: 'pending',
-  registerLink: ''
+  registerLink: '',
+  year: new Date().getFullYear(),
+  month: new Date().getMonth() + 1
 })
 const loading = ref(false)
 const docInput = ref('')
+
+const filterType = ref('all')
+const filterYear = ref('all')
+const filterMonth = ref('all')
+
+const yearOptions = computed(() => {
+  const years = Array.from({ length: 40 }, (_, i) => 1990 + i);
+  return years.map(y => ({ label: y.toString(), value: y.toString() }));
+});
+
+const monthOptions = [
+  'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+  'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
+].map((m, i) => ({ label: m, value: (i + 1).toString() }))
+
+watch([filterType, filterYear, filterMonth], () => {
+  const query: any = {}
+  if (filterType.value !== 'all') query.type = filterType.value
+  if (filterYear.value !== 'all') query.year = filterYear.value
+  if (filterMonth.value !== 'all') query.month = filterMonth.value
+  fetchPrograms(query)
+})
+
+watch(filterYear, (newVal) => {
+  if (newVal === 'all') filterMonth.value = 'all'
+})
 
 const openCreate = () => {
   editingId.value = null
@@ -48,7 +76,9 @@ const openCreate = () => {
     uploadedVideoUrl: '',
     zoomMeetingUrl: '',
     status: 'pending',
-    registerLink: '' 
+    registerLink: '',
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1
   })
   showModal.value = true
 }
@@ -57,7 +87,9 @@ const openEdit = (program: any) => {
   editingId.value = program._id
   Object.assign(form, { 
     ...program, 
-    date: program.date ? new Date(program.date).toISOString().split('T')[0] : '' 
+    date: program.date ? new Date(program.date).toISOString().split('T')[0] : '',
+    year: program.year || new Date(program.date || Date.now()).getFullYear(),
+    month: program.month || (new Date(program.date || Date.now()).getMonth() + 1)
   })
   showModal.value = true
 }
@@ -117,6 +149,44 @@ definePageMeta({
       <button @click="openCreate" class="px-10 py-5 bg-black text-white font-black text-[10px] tracking-[0.3em] uppercase hover:bg-gray-800 active:scale-95 transition-all shadow-xl shadow-black/10">
         NEW PROGRAM
       </button>
+    </div>
+
+    <!-- Aggressive Filter Toolbar -->
+    <div class="flex flex-col md:flex-row items-center gap-6 bg-white p-4 border border-gray-100 shadow-sm">
+      <div class="flex p-1 bg-gray-50 rounded-xl">
+        <button
+          v-for="f in ['all', 'upcoming', 'past']" :key="f"
+          @click="filterType = f"
+          class="px-6 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all"
+          :class="filterType === f ? 'bg-black text-white' : 'text-gray-400 hover:text-black'"
+        >
+          {{ f }}
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="w-40">
+          <CustomDropdown
+            v-model="filterYear"
+            :options="[{ label: 'ALL YEARS', value: 'all' }, ...yearOptions]"
+            placeholder="FILTER YEAR"
+          />
+        </div>
+        
+        <Transition
+          enter-active-class="transition duration-300 ease-out"
+          enter-from-class="opacity-0 -translate-x-4"
+          enter-to-class="opacity-100 translate-x-0"
+        >
+          <div v-if="filterYear !== 'all'" class="w-40">
+            <CustomDropdown
+              v-model="filterMonth"
+              :options="[{ label: 'ALL MONTHS', value: 'all' }, ...monthOptions]"
+              placeholder="FILTER MONTH"
+            />
+          </div>
+        </Transition>
+      </div>
     </div>
 
     <!-- State Handling -->
@@ -243,6 +313,24 @@ definePageMeta({
               <div>
                 <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Index Date (System)</label>
                 <input v-model="form.date" type="date" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none text-[10px] font-black tracking-widest uppercase" />
+              </div>
+          </div>
+        </section>
+
+        <section class="space-y-6">
+          <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300 border-b border-gray-100 pb-2">Temporal Indexing</h3>
+          <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Year of Record</label>
+                <select v-model="form.year" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none text-[10px] font-black tracking-widest uppercase">
+                  <option v-for="y in Array.from({length: 40}, (_, i) => 1990 + i)" :key="y" :value="y">{{ y }}</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Month of Record</label>
+                <select v-model="form.month" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none text-[10px] font-black tracking-widest uppercase">
+                  <option v-for="m in 12" :key="m" :value="m">{{ new Date(0, m-1).toLocaleString('default', { month: 'long' }).toUpperCase() }}</option>
+                </select>
               </div>
           </div>
         </section>

@@ -1,7 +1,8 @@
 <template>
-  <div class="min-h-screen bg-white text-black font-sans flex flex-col lg:flex-row">
+  <div class="h-screen bg-white text-black font-sans flex flex-col lg:flex-row overflow-hidden">
     <!-- Sidebar -->
     <aside 
+      v-if="!route.meta.hideSidebar"
       class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 p-8 transform transition-transform duration-300 lg:relative lg:translate-x-0"
       :class="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
     >
@@ -40,7 +41,7 @@
 
     <!-- Overlay -->
     <div 
-      v-if="isSidebarOpen" 
+      v-if="isSidebarOpen && !route.meta.hideSidebar" 
       @click="isSidebarOpen = false"
       class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
     ></div>
@@ -48,7 +49,7 @@
     <!-- Main Content -->
     <div class="flex-1 flex flex-col min-w-0">
       <!-- Top Bar -->
-      <header class="h-20 border-b border-gray-100 flex items-center justify-between px-8 bg-white/80 backdrop-blur-md sticky top-0 z-30">
+      <header v-if="!route.meta.hideHeader" class="h-20 border-b border-gray-100 flex items-center justify-between px-8 bg-white/80 backdrop-blur-md sticky top-0 z-30">
         <button @click="isSidebarOpen = true" class="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -72,21 +73,12 @@
         </div>
       </header>
 
-      <main class="flex-1 p-8 lg:p-12 overflow-y-auto bg-gray-50/50">
-        <div class="max-w-7xl mx-auto">
+      <main :class="['flex-1 overflow-y-auto bg-gray-50/50', route.meta.fullWidth ? '' : 'p-8 lg:p-12']">
+        <div :class="[route.meta.fullWidth ? 'w-full h-full' : 'max-w-7xl mx-auto']">
           <slot />
         </div>
       </main>
 
-      <footer class="p-8 border-t border-gray-100 bg-white">
-         <div class="max-w-7xl mx-auto flex justify-between items-center text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
-            <span>© {{ new Date().getFullYear() }} Hub Security Intelligence</span>
-            <div class="flex gap-8">
-              <a href="#" class="hover:text-black">Terms</a>
-              <a href="#" class="hover:text-black">Privacy</a>
-            </div>
-         </div>
-      </footer>
     </div>
 
     <!-- Logout Confirmation Modal -->
@@ -205,6 +197,42 @@ const navItems = [
     icon: defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
         h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129' })
+      ])
+    })
+  },
+  { 
+    label: 'Enquiries', 
+    path: '/enquiries',
+    icon: defineComponent({
+      render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
+        h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' })
+      ])
+    })
+  },
+  { 
+    label: 'Support Chat', 
+    path: '/chat',
+    icon: defineComponent({
+      render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
+        h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z' })
+      ])
+    })
+  },
+  {
+    label: 'Bot Config',
+    path: '/bot-config',
+    icon: defineComponent({
+      render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
+        h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' })
+      ])
+    })
+  },
+  {
+    label: 'Audit Trail',
+    path: '/audit-trail',
+    icon: defineComponent({
+      render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' }, [
+        h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' })
       ])
     })
   }

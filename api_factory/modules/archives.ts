@@ -1,8 +1,8 @@
 import { GATEWAY_ENDPOINT } from '../axios.config';
 
 export const archives_api = {
-  getArchives: () => {
-    return GATEWAY_ENDPOINT.get('/archive');
+  getArchives: (params?: any) => {
+    return GATEWAY_ENDPOINT.get('/archive', { params });
   },
   getArchive: (id: string) => {
     return GATEWAY_ENDPOINT.get(`/archive/${id}`);

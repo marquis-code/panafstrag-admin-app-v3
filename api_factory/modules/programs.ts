@@ -1,8 +1,8 @@
 import { GATEWAY_ENDPOINT } from '../axios.config';
 
 export const programs_api = {
-  getPrograms: () => {
-    return GATEWAY_ENDPOINT.get('/program');
+  getPrograms: (params?: any) => {
+    return GATEWAY_ENDPOINT.get('/program', { params });
   },
   getProgram: (id: string) => {
     return GATEWAY_ENDPOINT.get(`/program/${id}`);

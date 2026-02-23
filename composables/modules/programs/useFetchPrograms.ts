@@ -6,12 +6,12 @@ export const useFetchPrograms = () => {
   const programs = ref<any[]>([]);
   const error = ref<string | null>(null);
 
-  const fetchPrograms = async () => {
+  const fetchPrograms = async (query?: any) => {
     loading.value = true;
     error.value = null;
 
     try {
-      const res = await programs_api.getPrograms() as any;
+      const res = await programs_api.getPrograms(query) as any;
 
       if ([200, 201].includes(res?.status)) {
         programs.value = res.data?.data ?? res.data ?? [];

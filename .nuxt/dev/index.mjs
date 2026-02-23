@@ -647,7 +647,7 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
-    "apiBase": "https://panafstrag-backend-app-v3.onrender.com"
+    "apiBase": "http://localhost:3000"
   }
 };
 const envOptions = {

@@ -27,6 +27,16 @@ const form = reactive({
 })
 const loading = ref(false)
 
+const months = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+]
+
+const formatedMonth = (m: number) => {
+  if (!m) return '-'
+  return months[m - 1]
+}
+
 const openCreate = () => {
   editingId.value = null
   Object.assign(form, { title: '', description: '', type: 'speech', date: '', year: new Date().getFullYear(), month: '', fileUrl: '', thumbnailUrl: '' })
@@ -113,7 +123,8 @@ definePageMeta({
             <tr class="bg-gray-50 border-b border-gray-100">
               <th class="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Resource Narrative</th>
               <th class="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Classification</th>
-              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Indexing Year</th>
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Month</th>
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Year</th>
               <th class="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
             </tr>
           </thead>
@@ -130,6 +141,7 @@ definePageMeta({
                   {{ item.type }}
                 </span>
               </td>
+              <td class="px-8 py-6 font-black text-[10px] uppercase tracking-widest text-gray-400 group-hover:text-black transition-colors">{{ formatedMonth(item.month) }}</td>
               <td class="px-8 py-6 font-black text-[10px] uppercase tracking-widest text-gray-400 group-hover:text-black transition-colors">{{ item.year }}</td>
               <td class="px-8 py-6 text-right">
                 <div class="flex items-center justify-end gap-3">
@@ -167,6 +179,7 @@ definePageMeta({
                 <select v-model="form.type" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none text-[10px] font-black tracking-widest uppercase">
                   <option value="speech">SPEECH</option>
                   <option value="report">ANNUAL REPORT</option>
+                  <option value="publication">PUBLICATION</option>
                   <option value="media">MEDIA</option>
                   <option value="research">RESEARCH PAPER</option>
                 </select>
@@ -176,8 +189,11 @@ definePageMeta({
                 <input v-model.number="form.year" type="number" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none font-bold text-sm uppercase tracking-widest" />
               </div>
               <div>
-                <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Specific Date</label>
-                <input v-model="form.date" type="date" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none text-[10px] font-black tracking-widest uppercase" />
+                <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Month</label>
+                <select v-model.number="form.month" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none text-[10px] font-black tracking-widest uppercase">
+                  <option value="">SELECT MONTH</option>
+                  <option v-for="(m, i) in months" :key="i" :value="i + 1">{{ m }}</option>
+                </select>
               </div>
             </div>
           </div>
