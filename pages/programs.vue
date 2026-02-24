@@ -143,7 +143,7 @@ definePageMeta({
       <div>
         <p class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 mb-2">Operational Sector</p>
         <h1 class="text-4xl lg:text-6xl font-black tracking-tighter uppercase italic leading-none text-black">
-          Programs <span class="not-italic text-gray-400 leading-none">Management.</span>
+          Programs <span class="not-italic text-gray-400 leading-none">Management</span>
         </h1>
       </div>
       <button @click="openCreate" class="px-10 py-5 bg-black text-white font-black text-[10px] tracking-[0.3em] uppercase hover:bg-gray-800 active:scale-95 transition-all shadow-xl shadow-black/10">

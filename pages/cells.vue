@@ -119,11 +119,9 @@ definePageMeta({
             <tr v-for="cell in (cells as any[])" :key="cell._id" class="hover:bg-gray-50/50 transition-colors group">
               <td class="px-8 py-6">
                 <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 bg-gray-100 overflow-hidden border border-gray-100 grayscale hover:grayscale-0 transition-all duration-500">
-                    <img v-if="cell.imageUrl" :src="cell.imageUrl" class="w-full h-full object-cover" />
-                    <div v-else class="w-full h-full flex items-center justify-center text-[10px] font-black text-gray-300 uppercase">
-                      HUB
-                    </div>
+                  <div class="w-12 h-12 bg-gray-100 overflow-hidden border border-gray-100 grayscale hover:grayscale-0 transition-all duration-500 relative">
+                    <img v-if="cell.imageUrl" :src="cell.imageUrl" class="absolute inset-0 w-full h-full object-cover" />
+                    <img v-else src="@/assets/images/program-placeholder.png" class="absolute inset-0 w-full h-full object-cover opacity-60" />
                   </div>
                   <p class="font-black text-black uppercase tracking-tight group-hover:text-black transition-colors">{{ cell.name }}</p>
                 </div>
