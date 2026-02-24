@@ -19,9 +19,13 @@ const form = reactive({
   ctaDescription: '',
   websiteHeaderText: '',
   languageGroupFunction: '',
+  languageGroupFunctionTitle: '',
   languageGroupMembership: '',
+  languageGroupMembershipTitle: '',
   languageGroupLeadership: '',
+  languageGroupLeadershipTitle: '',
   languageGroupFees: '',
+  languageGroupFeesTitle: '',
   featuresTitle: '',
   featuresSubTitle: '',
   focusAreasPageTitle: '',
@@ -61,9 +65,14 @@ watch(homeContent, (val) => {
     form.ctaDescription = val.ctaDescription || ''
     form.websiteHeaderText = val.websiteHeaderText || ''
     form.languageGroupFunction = val.languageGroupFunction || ''
+    form.languageGroupFunctionTitle = val.languageGroupFunctionTitle || ''
     form.languageGroupMembership = val.languageGroupMembership || ''
+    form.languageGroupMembershipTitle = val.languageGroupMembershipTitle || ''
     form.languageGroupLeadership = val.languageGroupLeadership || ''
+    form.languageGroupLeadershipTitle = val.languageGroupLeadershipTitle || ''
     form.languageGroupFees = val.languageGroupFees || ''
+    form.languageGroupFeesTitle = val.languageGroupFeesTitle || ''
+    form.programsSubTitle = val.programsSubTitle || ''
     form.featuresTitle = val.featuresTitle || ''
     form.featuresSubTitle = val.featuresSubTitle || ''
     form.focusAreasPageTitle = val.focusAreasPageTitle || ''
@@ -202,6 +211,13 @@ definePageMeta({
               <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Programs Title</label>
               <input v-model="form.programsTitle" type="text" placeholder='Recent <span class="not-italic text-gray-400">Programs</span>' class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
             </div>
+            <div>
+              <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Programs SubTitle</label>
+              <input v-model="form.programsSubTitle" type="text" placeholder="Latest Updates" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-10 py-8 border-t border-gray-100">
             <div>
               <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Call-to-Action Title</label>
               <input v-model="form.ctaTitle" type="text" placeholder='Participate in <br class="hidden md:block" /> <span class="not-italic text-[#2E7D32]">the Future</span>' class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
@@ -342,19 +358,27 @@ definePageMeta({
             <h4 class="text-[9px] font-black uppercase tracking-widest text-gray-400">Language Groups Context</h4>
             <div class="grid md:grid-cols-2 gap-8">
               <div>
-                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Function</label>
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Function Title</label>
+                <input v-model="form.languageGroupFunctionTitle" type="text" placeholder="Function" class="w-full px-0 py-3 mb-4 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Function Description</label>
                 <textarea v-model="form.languageGroupFunction" rows="4" class="w-full p-4 bg-gray-50 border-none outline-none focus:ring-1 focus:ring-black transition-all font-medium text-sm leading-relaxed"></textarea>
               </div>
               <div>
-                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Membership</label>
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Membership Title</label>
+                <input v-model="form.languageGroupMembershipTitle" type="text" placeholder="Membership" class="w-full px-0 py-3 mb-4 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Membership Description</label>
                 <textarea v-model="form.languageGroupMembership" rows="4" class="w-full p-4 bg-gray-50 border-none outline-none focus:ring-1 focus:ring-black transition-all font-medium text-sm leading-relaxed"></textarea>
               </div>
               <div>
-                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Leadership</label>
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Leadership Title</label>
+                <input v-model="form.languageGroupLeadershipTitle" type="text" placeholder="Leadership" class="w-full px-0 py-3 mb-4 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Leadership Description</label>
                 <textarea v-model="form.languageGroupLeadership" rows="4" class="w-full p-4 bg-gray-50 border-none outline-none focus:ring-1 focus:ring-black transition-all font-medium text-sm leading-relaxed"></textarea>
               </div>
               <div>
-                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Fees</label>
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Fees Title</label>
+                <input v-model="form.languageGroupFeesTitle" type="text" placeholder="Fees" class="w-full px-0 py-3 mb-4 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Fees Description</label>
                 <textarea v-model="form.languageGroupFees" rows="4" class="w-full p-4 bg-gray-50 border-none outline-none focus:ring-1 focus:ring-black transition-all font-medium text-sm leading-relaxed"></textarea>
               </div>
             </div>
