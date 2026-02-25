@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { useHomeContent } from '@/composables/modules/home-content/useHomeContent'
+import { useCustomToast } from "@/composables/core/useCustomToast"
 
 const { homeContent, updateHomeContent, loading: fetchLoading } = useHomeContent()
+const { showToast } = useCustomToast()
 
 const form = reactive({
   aboutUsTitle: '',
@@ -15,6 +17,7 @@ const form = reactive({
   responsibilitiesTitle: '',
   responsibilitiesSubTitle: '',
   programsTitle: '',
+  programsSubTitle: '',
   ctaTitle: '',
   ctaDescription: '',
   websiteHeaderText: '',
@@ -112,9 +115,19 @@ const handleSubmit = async () => {
   try {
     await updateHomeContent(form)
     // Show success message? (Admin app might have a toast system, but let's stick to basic for now)
-    alert('Home content updated successfully')
+      showToast({
+          title: "Success",
+          message: "Home content updated successfully",
+          toastType: "success",
+          duration: 3000,
+        })
   } catch (error) {
-    alert('Failed to update home content')
+          showToast({
+          title: "Error",
+          message: "Failed to update home content",
+          toastType: "error",
+          duration: 3000,
+        })
   } finally {
     loading.value = false
   }

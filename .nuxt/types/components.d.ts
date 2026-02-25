@@ -22,6 +22,7 @@ interface _GlobalComponents {
   Logo: typeof import("../../components/Logo.vue")['default']
   MediaUpload: typeof import("../../components/MediaUpload.vue")['default']
   Modal: typeof import("../../components/Modal.vue")['default']
+  RichTextEditor: typeof import("../../components/RichTextEditor.vue")['default']
   UiToast: typeof import("../../components/ui/Toast.vue")['default']
   NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   NuxtLayout: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
@@ -54,6 +55,7 @@ interface _GlobalComponents {
   LazyLogo: LazyComponent<typeof import("../../components/Logo.vue")['default']>
   LazyMediaUpload: LazyComponent<typeof import("../../components/MediaUpload.vue")['default']>
   LazyModal: LazyComponent<typeof import("../../components/Modal.vue")['default']>
+  LazyRichTextEditor: LazyComponent<typeof import("../../components/RichTextEditor.vue")['default']>
   LazyUiToast: LazyComponent<typeof import("../../components/ui/Toast.vue")['default']>
   LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   LazyNuxtLayout: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
