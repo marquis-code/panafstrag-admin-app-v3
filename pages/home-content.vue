@@ -47,7 +47,9 @@ const form = reactive({
   contactPageDescription: '',
   languageGroupsPageTitle: '',
   languageGroupsPageDescription: '',
-  carousels: [] as any[]
+  carousels: [] as any[],
+  primaryNavItems: [] as any[],
+  instituteNavItems: [] as any[]
 })
 
 const loading = ref(false)
@@ -95,8 +97,16 @@ watch(homeContent, (val) => {
     form.languageGroupsPageTitle = val.languageGroupsPageTitle || ''
     form.languageGroupsPageDescription = val.languageGroupsPageDescription || ''
     form.carousels = val.carousels ? JSON.parse(JSON.stringify(val.carousels)) : []
+    form.primaryNavItems = val.primaryNavItems ? JSON.parse(JSON.stringify(val.primaryNavItems)) : []
+    form.instituteNavItems = val.instituteNavItems ? JSON.parse(JSON.stringify(val.instituteNavItems)) : []
   }
 }, { immediate: true })
+
+const addPrimaryNavItem = () => form.primaryNavItems.push({ label: '', path: '' })
+const removePrimaryNavItem = (index: number) => form.primaryNavItems.splice(index, 1)
+
+const addInstituteNavItem = () => form.instituteNavItems.push({ label: '', path: '' })
+const removeInstituteNavItem = (index: number) => form.instituteNavItems.splice(index, 1)
 
 const addCarouselItem = () => {
   form.carousels.push({
@@ -364,7 +374,7 @@ definePageMeta({
         <div class="space-y-8">
           <div>
             <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Website Top Header Ticker</label>
-            <input v-model="form.websiteHeaderText" type="text" placeholder="Est. 1992 — Pan-African Strategic & Policy Research Group" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+            <input v-model="form.websiteHeaderText" type="text" placeholder="Est. 1992 — Panafricana Stratetegic & Policy Research Group" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
           </div>
           
           <div class="pt-6 border-t border-gray-100 space-y-6">
@@ -394,6 +404,71 @@ definePageMeta({
                 <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Fees Description</label>
                 <textarea v-model="form.languageGroupFees" rows="4" class="w-full p-4 bg-gray-50 border-none outline-none focus:ring-1 focus:ring-black transition-all font-medium text-sm leading-relaxed"></textarea>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigation Management -->
+      <section class="grid md:grid-cols-2 gap-12">
+        <!-- Primary Navigation -->
+        <div class="space-y-8 bg-white p-8 border border-gray-100 shadow-sm">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+            <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">Primary Navigation</h3>
+            <button @click="addPrimaryNavItem" class="text-[9px] font-black uppercase tracking-widest text-black hover:text-gray-400 transition-colors">+ ADD ITEM</button>
+          </div>
+          
+          <div class="space-y-4">
+            <div v-for="(item, idx) in form.primaryNavItems" :key="idx" class="flex items-end gap-4 p-4 bg-gray-50 rounded-lg group relative">
+              <div class="flex-1 space-y-4">
+                <div>
+                  <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-1">Label</label>
+                  <input v-model="item.label" type="text" placeholder="e.g. Programs" class="w-full px-0 py-2 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-xs" />
+                </div>
+                <div>
+                  <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-1">Path</label>
+                  <input v-model="item.path" type="text" placeholder="e.g. /programs" class="w-full px-0 py-2 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-xs" />
+                </div>
+              </div>
+              <button @click="removePrimaryNavItem(idx)" class="pb-2 text-gray-300 hover:text-red-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </div>
+            <div v-if="!form.primaryNavItems.length" class="text-center py-8 text-[9px] font-black text-gray-400 uppercase tracking-widest">
+              No primary nav items.
+            </div>
+          </div>
+        </div>
+
+        <!-- Institute Navigation -->
+        <div class="space-y-8 bg-white p-8 border border-gray-100 shadow-sm">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+            <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">The Institute Dropdown</h3>
+            <button @click="addInstituteNavItem" class="text-[9px] font-black uppercase tracking-widest text-black hover:text-gray-400 transition-colors">+ ADD ITEM</button>
+          </div>
+
+          <div class="space-y-4">
+            <div v-for="(item, idx) in form.instituteNavItems" :key="idx" class="flex items-end gap-4 p-4 bg-gray-50 rounded-lg group relative">
+              <div class="flex-1 space-y-4">
+                <div>
+                  <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-1">Label</label>
+                  <input v-model="item.label" type="text" placeholder="e.g. Board" class="w-full px-0 py-2 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-xs" />
+                </div>
+                <div>
+                  <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-1">Path</label>
+                  <input v-model="item.path" type="text" placeholder="e.g. /board" class="w-full px-0 py-2 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-xs" />
+                </div>
+              </div>
+              <button @click="removeInstituteNavItem(idx)" class="pb-2 text-gray-300 hover:text-red-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </div>
+            <div v-if="!form.instituteNavItems.length" class="text-center py-8 text-[9px] font-black text-gray-400 uppercase tracking-widest">
+              No institute dropdown items.
             </div>
           </div>
         </div>

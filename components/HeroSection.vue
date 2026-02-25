@@ -11,8 +11,8 @@
         Welcome to Panafstrag
       </div>
       <h1 class="text-5xl lg:text-7xl font-black mb-8 leading-tight tracking-tight text-gray-900 dark:text-white">
-        Pan-African Strategy and <br />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Policy Research</span>
+        Panafricana Stratetegic & <br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Policy Research Group</span>
       </h1>
       <p class="text-xl text-slate-600 dark:text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed">
         We provide deep strategic insights and policy recommendations to foster sustainable development across the African continent through rigorous research and collaborative action.
