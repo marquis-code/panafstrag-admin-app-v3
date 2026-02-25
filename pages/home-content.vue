@@ -49,7 +49,14 @@ const form = reactive({
   languageGroupsPageDescription: '',
   carousels: [] as any[],
   primaryNavItems: [] as any[],
-  instituteNavItems: [] as any[]
+  instituteNavItems: [] as any[],
+  contactEmail: '',
+  contactPhone: '',
+  contactAddress: '',
+  contactOfficeHoursMonFri: '',
+  contactOfficeHoursSat: '',
+  contactOfficeHoursSun: '',
+  contactSocialLinks: [] as any[]
 })
 
 const loading = ref(false)
@@ -99,6 +106,13 @@ watch(homeContent, (val) => {
     form.carousels = val.carousels ? JSON.parse(JSON.stringify(val.carousels)) : []
     form.primaryNavItems = val.primaryNavItems ? JSON.parse(JSON.stringify(val.primaryNavItems)) : []
     form.instituteNavItems = val.instituteNavItems ? JSON.parse(JSON.stringify(val.instituteNavItems)) : []
+    form.contactEmail = val.contactEmail || ''
+    form.contactPhone = val.contactPhone || ''
+    form.contactAddress = val.contactAddress || ''
+    form.contactOfficeHoursMonFri = val.contactOfficeHoursMonFri || ''
+    form.contactOfficeHoursSat = val.contactOfficeHoursSat || ''
+    form.contactOfficeHoursSun = val.contactOfficeHoursSun || ''
+    form.contactSocialLinks = val.contactSocialLinks ? JSON.parse(JSON.stringify(val.contactSocialLinks)) : []
   }
 }, { immediate: true })
 
@@ -107,6 +121,9 @@ const removePrimaryNavItem = (index: number) => form.primaryNavItems.splice(inde
 
 const addInstituteNavItem = () => form.instituteNavItems.push({ label: '', path: '' })
 const removeInstituteNavItem = (index: number) => form.instituteNavItems.splice(index, 1)
+
+const addSocialLink = () => form.contactSocialLinks.push({ platform: '', url: '' })
+const removeSocialLink = (index: number) => form.contactSocialLinks.splice(index, 1)
 
 const addCarouselItem = () => {
   form.carousels.push({
@@ -363,6 +380,77 @@ definePageMeta({
             <div>
               <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Language Groups Page Description</label>
               <textarea v-model="form.languageGroupsPageDescription" rows="2" class="w-full p-4 bg-gray-50 border-none outline-none focus:ring-1 focus:ring-black transition-all font-medium text-sm leading-relaxed"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Details Configuration -->
+      <section class="bg-white p-8 md:p-12 border border-gray-100 shadow-sm space-y-8">
+        <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300 border-b border-gray-100 pb-2">Contact Details Configuration</h3>
+        
+        <div class="space-y-8">
+          <div class="grid md:grid-cols-2 gap-10">
+            <div>
+              <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Contact Email</label>
+              <input v-model="form.contactEmail" type="email" placeholder="info@panafstrag.org" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+            </div>
+            <div>
+              <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Contact Phone</label>
+              <input v-model="form.contactPhone" type="text" placeholder="+233 XXX XXX XXX" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Physical Address</label>
+            <textarea v-model="form.contactAddress" rows="3" placeholder="PANAFSTRAG Secretariat, Accra, Ghana..." class="w-full p-4 bg-gray-50 border-none outline-none focus:ring-1 focus:ring-black transition-all font-medium text-sm leading-relaxed"></textarea>
+          </div>
+
+          <div class="pt-6 border-t border-gray-100">
+            <h4 class="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-6">Office Hours</h4>
+            <div class="grid md:grid-cols-3 gap-8">
+              <div>
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Mon - Fri</label>
+                <input v-model="form.contactOfficeHoursMonFri" type="text" placeholder="09:00 AM - 05:00 PM" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+              </div>
+              <div>
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Saturday</label>
+                <input v-model="form.contactOfficeHoursSat" type="text" placeholder="Closed" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+              </div>
+              <div>
+                <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Sunday</label>
+                <input v-model="form.contactOfficeHoursSun" type="text" placeholder="Closed" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-gray-100">
+            <div class="flex items-center justify-between mb-6">
+              <h4 class="text-[9px] font-black uppercase tracking-widest text-gray-400">Social Media Links</h4>
+              <button @click="addSocialLink" class="text-[8px] font-black uppercase tracking-widest text-[#2E7D32] hover:text-black transition-colors focus:outline-none">+ ADD LINK</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div v-for="(link, idx) in form.contactSocialLinks" :key="idx" class="flex items-end gap-3 p-4 bg-gray-50 rounded-lg group relative">
+                <div class="flex-1 grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-1">Platform</label>
+                    <input v-model="link.platform" type="text" placeholder="Twitter" class="w-full px-0 py-2 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-xs" />
+                  </div>
+                  <div>
+                    <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-1">URL</label>
+                    <input v-model="link.url" type="text" placeholder="https://..." class="w-full px-0 py-2 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-xs" />
+                  </div>
+                </div>
+                <button @click="removeSocialLink(idx)" class="pb-2 text-gray-300 hover:text-red-500 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div v-if="!form.contactSocialLinks.length" class="text-center py-6 bg-gray-50/50 rounded-lg border border-dashed border-gray-100">
+               <p class="text-[8px] font-black text-gray-300 uppercase tracking-widest">No social links configured.</p>
             </div>
           </div>
         </div>
