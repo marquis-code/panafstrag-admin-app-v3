@@ -50,8 +50,8 @@ const form = reactive({
   carousels: [] as any[],
   primaryNavItems: [] as any[],
   instituteNavItems: [] as any[],
-  contactEmail: '',
-  contactPhone: '',
+  contactEmail: [] as string[],
+  contactPhone: [] as string[],
   contactAddress: '',
   contactOfficeHoursMonFri: '',
   contactOfficeHoursSat: '',
@@ -106,8 +106,8 @@ watch(homeContent, (val) => {
     form.carousels = val.carousels ? JSON.parse(JSON.stringify(val.carousels)) : []
     form.primaryNavItems = val.primaryNavItems ? JSON.parse(JSON.stringify(val.primaryNavItems)) : []
     form.instituteNavItems = val.instituteNavItems ? JSON.parse(JSON.stringify(val.instituteNavItems)) : []
-    form.contactEmail = val.contactEmail || ''
-    form.contactPhone = val.contactPhone || ''
+    form.contactEmail = val.contactEmail ? (Array.isArray(val.contactEmail) ? [...val.contactEmail] : [val.contactEmail]) : []
+    form.contactPhone = val.contactPhone ? (Array.isArray(val.contactPhone) ? [...val.contactPhone] : [val.contactPhone]) : []
     form.contactAddress = val.contactAddress || ''
     form.contactOfficeHoursMonFri = val.contactOfficeHoursMonFri || ''
     form.contactOfficeHoursSat = val.contactOfficeHoursSat || ''
@@ -136,6 +136,12 @@ const addCarouselItem = () => {
 const removeCarouselItem = (index: number) => {
   form.carousels.splice(index, 1)
 }
+
+const addContactEmail = () => form.contactEmail.push('')
+const removeContactEmail = (index: number) => form.contactEmail.splice(index, 1)
+
+const addContactPhone = () => form.contactPhone.push('')
+const removeContactPhone = (index: number) => form.contactPhone.splice(index, 1)
 
 const handleSubmit = async () => {
   loading.value = true
@@ -392,12 +398,42 @@ definePageMeta({
         <div class="space-y-8">
           <div class="grid md:grid-cols-2 gap-10">
             <div>
-              <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Contact Email</label>
-              <input v-model="form.contactEmail" type="email" placeholder="info@panafstrag.org" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400">Contact Emails</label>
+                <button @click="addContactEmail" class="text-[8px] font-black uppercase tracking-widest text-[#2E7D32] hover:text-black transition-colors focus:outline-none">+ ADD EMAIL</button>
+              </div>
+              <div class="space-y-3">
+                <div v-for="(email, idx) in form.contactEmail" :key="'email-'+idx" class="flex items-center gap-3">
+                  <input v-model="form.contactEmail[idx]" type="email" placeholder="info@panafstrag.org" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+                   <button @click="removeContactEmail(idx)" class="text-gray-300 hover:text-red-500 transition-colors shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                 <div v-if="!form.contactEmail.length" class="text-left py-2">
+                   <p class="text-[8px] font-black text-gray-300 uppercase tracking-widest">No emails configured.</p>
+                </div>
+              </div>
             </div>
             <div>
-              <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Contact Phone</label>
-              <input v-model="form.contactPhone" type="text" placeholder="+233 XXX XXX XXX" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400">Contact Phones</label>
+                <button @click="addContactPhone" class="text-[8px] font-black uppercase tracking-widest text-[#2E7D32] hover:text-black transition-colors focus:outline-none">+ ADD PHONE</button>
+              </div>
+              <div class="space-y-3">
+                <div v-for="(phone, idx) in form.contactPhone" :key="'phone-'+idx" class="flex items-center gap-3">
+                  <input v-model="form.contactPhone[idx]" type="text" placeholder="+233 XXX XXX XXX" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+                  <button @click="removeContactPhone(idx)" class="text-gray-300 hover:text-red-500 transition-colors shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                 <div v-if="!form.contactPhone.length" class="text-left py-2">
+                   <p class="text-[8px] font-black text-gray-300 uppercase tracking-widest">No phones configured.</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -407,8 +443,8 @@ definePageMeta({
           </div>
 
           <div class="pt-6 border-t border-gray-100">
-            <h4 class="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-6">Office Hours</h4>
-            <div class="grid md:grid-cols-3 gap-8">
+            <h4 class="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-6">Office Hours (Disabled)</h4>
+            <!-- <div class="grid md:grid-cols-3 gap-8">
               <div>
                 <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Mon - Fri</label>
                 <input v-model="form.contactOfficeHoursMonFri" type="text" placeholder="09:00 AM - 05:00 PM" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
@@ -421,7 +457,7 @@ definePageMeta({
                 <label class="block text-[8px] font-black uppercase tracking-widest text-gray-400 mb-2">Sunday</label>
                 <input v-model="form.contactOfficeHoursSun" type="text" placeholder="Closed" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="pt-6 border-t border-gray-100">
