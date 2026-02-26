@@ -56,7 +56,8 @@ const form = reactive({
   contactOfficeHoursMonFri: '',
   contactOfficeHoursSat: '',
   contactOfficeHoursSun: '',
-  contactSocialLinks: [] as any[]
+  contactSocialLinks: [] as any[],
+  heroEstablishedText: ''
 })
 
 const loading = ref(false)
@@ -113,6 +114,7 @@ watch(homeContent, (val) => {
     form.contactOfficeHoursSat = val.contactOfficeHoursSat || ''
     form.contactOfficeHoursSun = val.contactOfficeHoursSun || ''
     form.contactSocialLinks = val.contactSocialLinks ? JSON.parse(JSON.stringify(val.contactSocialLinks)) : []
+    form.heroEstablishedText = val.heroEstablishedText || ''
   }
 }, { immediate: true })
 
@@ -499,6 +501,11 @@ definePageMeta({
           <div>
             <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Website Top Header Ticker</label>
             <input v-model="form.websiteHeaderText" type="text" placeholder="Est. 1992 — Panafricana Stratetegic & Policy Research Group" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+          </div>
+
+          <div>
+            <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Hero Established Text</label>
+            <input v-model="form.heroEstablishedText" type="text" placeholder="ESTABLISHED 1992" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
           </div>
           
           <div class="pt-6 border-t border-gray-100 space-y-6">
