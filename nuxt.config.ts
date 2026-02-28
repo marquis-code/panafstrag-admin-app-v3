@@ -15,6 +15,13 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  nitro: {
+    prerender: {
+      routes: ['/', '/404.html'], 
+      ignore: ['/dynamic-routes', '/api'],
+      failOnError: false
+    }
+  },
   runtimeConfig: {
     public: {
       apiBase: process.env.VITE_BASE_URL,
