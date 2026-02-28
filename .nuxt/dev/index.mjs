@@ -634,6 +634,12 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
+      "/": {
+        "prerender": true
+      },
+      "/404.html": {
+        "prerender": true
+      },
       "/_nuxt/builds/meta/**": {
         "headers": {
           "cache-control": "public, max-age=31536000, immutable"
@@ -643,11 +649,17 @@ const _inlineRuntimeConfig = {
         "headers": {
           "cache-control": "public, max-age=1, immutable"
         }
+      },
+      "//_payload.json": {
+        "prerender": true
+      },
+      "/404.html/_payload.json": {
+        "prerender": true
       }
     }
   },
   "public": {
-    "apiBase": "http://localhost:3000"
+    "apiBase": "https://panafstrag-backend-app-v3.onrender.com"
   }
 };
 const envOptions = {

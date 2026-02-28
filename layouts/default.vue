@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-white text-black font-sans flex flex-col lg:flex-row overflow-hidden">
+  <div class="h-[100dvh] bg-white text-black font-sans flex flex-col lg:flex-row overflow-hidden">
     <!-- Sidebar -->
     <aside 
       v-if="!route.meta.hideSidebar"
@@ -41,14 +41,14 @@
     <div class="flex-1 flex flex-col min-w-0">
       <!-- Top Bar -->
       <header v-if="!route.meta.hideHeader" class="h-20 border-b border-gray-100 flex items-center justify-between px-8 bg-white/80 backdrop-blur-md sticky top-0 z-30">
-        <button @click="isSidebarOpen = true" class="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded-lg">
+        <button @click="isSidebarOpen = true" class="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded-lg shrink-0">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
 
-        <div class="flex items-center gap-4">
-          <p class="text-[10px] font-black uppercase tracking-widest text-gray-400">Panafstrag Administrative Sector</p>
+        <div class="flex items-center gap-4 min-w-0">
+          <p class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-gray-400 truncate">Panafstrag Administrative Sector</p>
         </div>
 
         <div class="flex items-center gap-6">
@@ -102,7 +102,7 @@
         </div>
       </header>
 
-      <main :class="['flex-1 overflow-y-auto bg-gray-50/50', route.meta.fullWidth ? '' : 'p-8 lg:p-12']">
+      <main :class="['flex-1 overflow-y-auto bg-gray-50/50 custom-scrollbar', route.meta.fullWidth ? '' : 'p-6 sm:p-8 lg:p-12']">
         <div :class="[route.meta.fullWidth ? 'w-full h-full' : 'max-w-7xl mx-auto']">
           <slot />
         </div>

@@ -1,0 +1,1 @@
+import{u as o}from"./BsOttllv.js";import{S as r,q as a}from"./Df4s53kg.js";import"./CHTJDVlQ.js";const f=r((e,i)=>{const{token:t}=o();if(!t.value&&!["/login","/register"].includes(e.path))return a("/login")});export{f as default};

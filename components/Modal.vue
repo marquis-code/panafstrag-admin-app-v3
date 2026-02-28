@@ -18,7 +18,7 @@
           leave-to-class="opacity-0 scale-95 translate-y-4"
         >
           <div v-if="show" class="bg-white w-full max-w-4xl border border-gray-100 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-10 py-8 flex items-center justify-between border-b border-gray-50 shrink-0">
+            <div class="px-6 sm:px-10 py-6 sm:py-8 flex items-center justify-between border-b border-gray-50 shrink-0">
               <h3 class="text-[14px] font-black uppercase tracking-[0.3em] leading-none">{{ title }}</h3>
               <button @click="$emit('close')" class="p-2 hover:bg-gray-50 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,10 +26,10 @@
                 </svg>
               </button>
             </div>
-            <div class="px-10 py-10 overflow-y-auto custom-scrollbar flex-1">
+            <div class="px-6 sm:px-10 py-6 sm:py-10 overflow-y-auto custom-scrollbar flex-1">
               <slot />
             </div>
-            <div v-if="$slots.actions" class="px-10 py-8 bg-gray-50/50 flex justify-end gap-6 border-t border-gray-50 shrink-0">
+            <div v-if="$slots.actions" class="px-6 sm:px-10 py-6 sm:py-8 bg-gray-50/50 flex justify-end gap-6 border-t border-gray-50 shrink-0">
               <slot name="actions" />
             </div>
           </div>
