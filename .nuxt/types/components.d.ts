@@ -16,6 +16,7 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 interface _GlobalComponents {
   ChatWidget: typeof import("../../components/ChatWidget.vue")['default']
   ConfirmModal: typeof import("../../components/ConfirmModal.vue")['default']
+  DocumentUpload: typeof import("../../components/DocumentUpload.vue")['default']
   EmptyState: typeof import("../../components/EmptyState.vue")['default']
   HeroSection: typeof import("../../components/HeroSection.vue")['default']
   LoadingState: typeof import("../../components/LoadingState.vue")['default']
@@ -49,6 +50,7 @@ interface _GlobalComponents {
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
   LazyChatWidget: LazyComponent<typeof import("../../components/ChatWidget.vue")['default']>
   LazyConfirmModal: LazyComponent<typeof import("../../components/ConfirmModal.vue")['default']>
+  LazyDocumentUpload: LazyComponent<typeof import("../../components/DocumentUpload.vue")['default']>
   LazyEmptyState: LazyComponent<typeof import("../../components/EmptyState.vue")['default']>
   LazyHeroSection: LazyComponent<typeof import("../../components/HeroSection.vue")['default']>
   LazyLoadingState: LazyComponent<typeof import("../../components/LoadingState.vue")['default']>

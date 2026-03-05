@@ -500,7 +500,7 @@ definePageMeta({
         <div class="space-y-8">
           <div>
             <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Website Top Header Ticker</label>
-            <input v-model="form.websiteHeaderText" type="text" placeholder="Est. 1992 — Panafricana Stratetegic & Policy Research Group" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
+            <input v-model="form.websiteHeaderText" type="text" placeholder="Est. 1992 — Panafricana Strategic & Policy Research Group" class="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-black outline-none transition-all font-bold text-sm" />
           </div>
 
           <div>

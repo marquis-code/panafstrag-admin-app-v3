@@ -5,6 +5,7 @@ import { useCreateProgram } from '@/composables/modules/programs/useCreateProgra
 import { useUpdateProgram } from '@/composables/modules/programs/useUpdateProgram'
 import { useDeleteProgram } from '@/composables/modules/programs/useDeleteProgram'
 import { useCustomToast } from '@/composables/core/useCustomToast'
+import DocumentUpload from '@/components/DocumentUpload.vue'
 
 const { fetchPrograms, programs, loading: fetchLoading } = useFetchPrograms()
 const { createProgram } = useCreateProgram()
@@ -467,18 +468,27 @@ definePageMeta({ middleware: 'auth' })
         <section class="space-y-6">
           <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300 border-b border-gray-100 pb-2">Documents & Registration</h3>
           <div>
-            <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-4">Annexed Files</label>
-            <div class="flex gap-4 mb-4">
-              <input v-model="docInput" @keyup.enter="() => { if(docInput) { form.uploadedDocumentFiles.push(docInput); docInput = '' } }" type="url" placeholder="https://doc-url.pdf" class="flex-1 px-4 py-3 bg-gray-50 border-none text-[10px] font-black tracking-widest uppercase outline-none focus:ring-1 focus:ring-black rounded-lg" />
-              <button @click="() => { if(docInput) { form.uploadedDocumentFiles.push(docInput); docInput = '' } }" class="px-6 bg-black text-white text-[9px] font-black uppercase tracking-widest rounded-lg">ADD</button>
-            </div>
-            <div class="flex flex-wrap gap-2">
-              <span v-for="(doc, index) in form.uploadedDocumentFiles" :key="index" class="pl-4 pr-1 py-1.5 bg-gray-50 border border-gray-100 rounded-md text-[10px] font-black flex items-center gap-3 italic">
-                {{ doc?.split('/').pop()?.toUpperCase() || 'DOCUMENT' }}
-                <button @click="form.uploadedDocumentFiles.splice(index, 1)" class="p-1 hover:text-red-500 transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
-              </span>
+            <label class="block text-[9px] font-black uppercase tracking-widest text-gray-400 mb-4">Annexed Files (PDF, Excel, Word, PPT)</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div v-for="(doc, index) in form.uploadedDocumentFiles" :key="index" class="relative group">
+                <div class="p-4 bg-gray-50 border border-gray-100 rounded-xl flex items-center gap-4 italic shadow-sm hover:shadow-md transition-all">
+                  <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-black shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-[10px] font-black uppercase truncate text-black">{{ doc?.split('/').pop()?.split('_').pop() || 'DOCUMENT' }}</p>
+                    <p class="text-[8px] font-black text-gray-400 uppercase tracking-widest mt-0.5">Annexed Resource</p>
+                  </div>
+                  <button @click="form.uploadedDocumentFiles.splice(index, 1)" class="p-2 text-gray-300 hover:text-red-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="border-2 border-dashed border-gray-100 rounded-xl p-4 flex flex-col items-center justify-center bg-gray-50/30 hover:bg-gray-50 transition-all">
+                <DocumentUpload :model-value="''" @update:model-value="(v: string) => { if(v) form.uploadedDocumentFiles.push(v) }" folder="programs/documents" />
+              </div>
             </div>
           </div>
           <div>
