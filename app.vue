@@ -22,7 +22,7 @@
 <script setup lang="ts">
 // Global app configuration
 useHead({
-  title: 'Doctor dey consulting | Book Trusted Doctors & Medical Consultations Online',
+  title: 'PANAFSTRAG Admin | Content Management System',
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -40,14 +40,14 @@ useHead({
 })
 
 useSeoMeta({
-  title: 'Doctor dey consulting — Book Doctors & Medical Consultations Online in Seconds',
-  ogTitle: 'Doctor dey consulting — Find & Book Verified Doctors in Minutes',
-  description: 'Doctor dey consulting is the easiest way to find verified doctors, book medical consultations, and access healthcare conveniently from anywhere. Secure, fast, and reliable telehealth.',
-  ogDescription: 'Book verified doctors and medical consultations instantly with Doctor dey consulting. Secure telehealth services, appointment scheduling, and digital healthcare access.',
+  title: 'PANAFSTRAG Admin — Simple & Clean Management',
+  ogTitle: 'PANAFSTRAG Admin Panel',
+  description: 'Manage PANAFSTRAG website content, programs, and hubs efficiently.',
+  ogDescription: 'Administrative dashboard for PANAFSTRAG content management.',
   ogImage: '/images/og-image.jpg',
-  ogUrl: 'https://drconnect.ng',
-  twitterTitle: 'Doctor dey consulting — Your Digital Doctor Appointment Platform',
-  twitterDescription: 'Find trusted doctors, schedule medical visits, and access telehealth services online with Doctor dey consulting.',
+  ogUrl: 'https://admin.panafstrag.org',
+  twitterTitle: 'PANAFSTRAG Admin Panel',
+  twitterDescription: 'Manage PANAFSTRAG website content efficiently.',
   twitterImage: '/images/og-image.jpg',
   twitterCard: 'summary_large_image'
 })

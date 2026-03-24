@@ -1,6 +1,79 @@
+<template>
+  <div class="space-y-8 py-4">
+    <div class="space-y-2 text-center lg:text-left">
+      <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Create Account</h2>
+      <p class="text-gray-500 font-medium text-sm leading-relaxed max-w-sm">
+        Create an account to start managing the platform.
+      </p>
+    </div>
+
+    <form @submit.prevent="handleRegister" class="space-y-6">
+      <div class="space-y-4">
+        <AnimatedInput 
+          v-model="form.name"
+          label="Full Name"
+          type="text"
+          placeholder="e.g. Adebayo Williams"
+        />
+
+        <AnimatedInput 
+          v-model="form.email"
+          label="Email Address"
+          type="email"
+          placeholder="admin@panafstrag.org"
+          :error-message="registerError || ''"
+          :show-error="!!registerError"
+        />
+
+        <AnimatedInput 
+          v-model="form.password"
+          label="Password"
+          type="password"
+          placeholder="••••••••"
+        />
+      </div>
+
+      <div class="flex items-start gap-2">
+        <input type="checkbox" required id="terms" class="custom-checkbox" />
+        <label for="terms" class="text-xs font-medium text-gray-500 leading-relaxed cursor-pointer">
+          I agree to the <a href="#" class="text-blue-600 font-bold hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 font-bold hover:underline">Privacy Policy</a>.
+        </label>
+      </div>
+
+      <button 
+        type="submit" 
+        :disabled="registerLoading"
+        class="w-full py-3 bg-blue-600 text-white rounded-lg font-bold text-sm  tracking-wider shadow-sm hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4"
+      >
+        <div v-if="registerLoading" class="h-5 w-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+        <template v-else>
+          <span>Create Account</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </template>
+      </button>
+    </form>
+
+    <div class="relative py-4">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-100"></div>
+      </div>
+      <div class="relative flex justify-center text-[10px] font-bold uppercase tracking-widest">
+        <span class="bg-white px-4 text-gray-300 font-black">Admin Registration</span>
+      </div>
+    </div>
+
+    <p class="text-center text-sm font-medium text-gray-500">
+      Already have an account? <NuxtLink to="/login" class="text-blue-600 font-bold hover:text-blue-700 transition-colors ml-1">Login here</NuxtLink>
+    </p>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useRegister } from '@/composables/modules/auth/useRegister'
+
 const { register, loading: registerLoading, error: registerError } = useRegister()
 const form = reactive({
   name: '',
@@ -25,67 +98,3 @@ definePageMeta({
   layout: 'auth'
 })
 </script>
-
-<template>
-  <div class="max-w-md mx-auto py-20">
-    <div class="bg-white border border-gray-100 p-10 shadow-2xl">
-      <div class="text-center mb-10">
-        <Logo class="justify-center mb-6" />
-        <h1 class="text-3xl font-black tracking-tighter uppercase italic">Institutional <span class="not-italic text-gray-400">Registry.</span></h1>
-        <p class="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em] mt-3">New Personnel Entry Protocol</p>
-      </div>
-
-      <form @submit.prevent="handleRegister" class="space-y-8">
-        <div>
-          <label class="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Legal Designation (Name)</label>
-          <input 
-            v-model="form.name" 
-            type="text" 
-            required 
-            placeholder="JOHN DOE"
-            class="w-full px-0 py-4 bg-transparent border-b border-gray-100 focus:border-black outline-none transition-all font-bold text-sm uppercase tracking-widest placeholder:text-gray-200"
-          />
-        </div>
-        <div>
-          <label class="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Master Identity (Email)</label>
-          <input 
-            v-model="form.email" 
-            type="email" 
-            required 
-            placeholder="AUTHORITY@PANAFSTRAG.ORG"
-            class="w-full px-0 py-4 bg-transparent border-b border-gray-100 focus:border-black outline-none transition-all font-bold text-sm uppercase tracking-widest placeholder:text-gray-200"
-          />
-        </div>
-        <div>
-          <label class="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Access Protocol (Password)</label>
-          <input 
-            v-model="form.password" 
-            type="password" 
-            required 
-            placeholder="••••••••"
-            class="w-full px-0 py-4 bg-transparent border-b border-gray-100 focus:border-black outline-none transition-all font-bold text-sm uppercase tracking-widest placeholder:text-gray-200"
-          />
-        </div>
-
-        <div v-if="registerError" class="p-4 border border-black text-black text-[10px] font-black uppercase tracking-widest text-center">
-          {{ registerError }}
-        </div>
-
-        <button 
-          type="submit" 
-          :disabled="registerLoading"
-          class="w-full py-6 bg-black text-white font-black text-[10px] tracking-[0.3em] uppercase hover:bg-gray-800 active:scale-95 transition-all shadow-xl shadow-black/10 disabled:opacity-30"
-        >
-          {{ registerLoading ? 'INITIALIZING...' : 'AUTHORIZE REGISTRY' }}
-        </button>
-      </form>
-
-      <div class="mt-12 text-center">
-        <p class="text-gray-400 text-[9px] font-black uppercase tracking-widest">
-          Existing institutional record? 
-          <NuxtLink to="/login" class="text-black underline underline-offset-4 hover:tracking-widest transition-all">Login Protocol</NuxtLink>
-        </p>
-      </div>
-    </div>
-  </div>
-</template>

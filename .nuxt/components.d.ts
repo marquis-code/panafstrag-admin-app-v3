@@ -14,8 +14,10 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 
+export const AnimatedInput: typeof import("../components/AnimatedInput.vue")['default']
 export const ChatWidget: typeof import("../components/ChatWidget.vue")['default']
 export const ConfirmModal: typeof import("../components/ConfirmModal.vue")['default']
+export const CustomDatePicker: typeof import("../components/CustomDatePicker.vue")['default']
 export const DocumentUpload: typeof import("../components/DocumentUpload.vue")['default']
 export const EmptyState: typeof import("../components/EmptyState.vue")['default']
 export const HeroSection: typeof import("../components/HeroSection.vue")['default']
@@ -24,6 +26,7 @@ export const Logo: typeof import("../components/Logo.vue")['default']
 export const MediaUpload: typeof import("../components/MediaUpload.vue")['default']
 export const Modal: typeof import("../components/Modal.vue")['default']
 export const RichTextEditor: typeof import("../components/RichTextEditor.vue")['default']
+export const SelectInput: typeof import("../components/SelectInput.vue")['default']
 export const UiToast: typeof import("../components/ui/Toast.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
@@ -48,8 +51,10 @@ export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
+export const LazyAnimatedInput: LazyComponent<typeof import("../components/AnimatedInput.vue")['default']>
 export const LazyChatWidget: LazyComponent<typeof import("../components/ChatWidget.vue")['default']>
 export const LazyConfirmModal: LazyComponent<typeof import("../components/ConfirmModal.vue")['default']>
+export const LazyCustomDatePicker: LazyComponent<typeof import("../components/CustomDatePicker.vue")['default']>
 export const LazyDocumentUpload: LazyComponent<typeof import("../components/DocumentUpload.vue")['default']>
 export const LazyEmptyState: LazyComponent<typeof import("../components/EmptyState.vue")['default']>
 export const LazyHeroSection: LazyComponent<typeof import("../components/HeroSection.vue")['default']>
@@ -58,6 +63,7 @@ export const LazyLogo: LazyComponent<typeof import("../components/Logo.vue")['de
 export const LazyMediaUpload: LazyComponent<typeof import("../components/MediaUpload.vue")['default']>
 export const LazyModal: LazyComponent<typeof import("../components/Modal.vue")['default']>
 export const LazyRichTextEditor: LazyComponent<typeof import("../components/RichTextEditor.vue")['default']>
+export const LazySelectInput: LazyComponent<typeof import("../components/SelectInput.vue")['default']>
 export const LazyUiToast: LazyComponent<typeof import("../components/ui/Toast.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
 export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
