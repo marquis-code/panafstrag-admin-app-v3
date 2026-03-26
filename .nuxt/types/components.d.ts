@@ -18,6 +18,7 @@ interface _GlobalComponents {
   ChatWidget: typeof import("../../components/ChatWidget.vue")['default']
   ConfirmModal: typeof import("../../components/ConfirmModal.vue")['default']
   CustomDatePicker: typeof import("../../components/CustomDatePicker.vue")['default']
+  CustomTimeSelect: typeof import("../../components/CustomTimeSelect.vue")['default']
   DocumentUpload: typeof import("../../components/DocumentUpload.vue")['default']
   EmptyState: typeof import("../../components/EmptyState.vue")['default']
   HeroSection: typeof import("../../components/HeroSection.vue")['default']
@@ -55,6 +56,7 @@ interface _GlobalComponents {
   LazyChatWidget: LazyComponent<typeof import("../../components/ChatWidget.vue")['default']>
   LazyConfirmModal: LazyComponent<typeof import("../../components/ConfirmModal.vue")['default']>
   LazyCustomDatePicker: LazyComponent<typeof import("../../components/CustomDatePicker.vue")['default']>
+  LazyCustomTimeSelect: LazyComponent<typeof import("../../components/CustomTimeSelect.vue")['default']>
   LazyDocumentUpload: LazyComponent<typeof import("../../components/DocumentUpload.vue")['default']>
   LazyEmptyState: LazyComponent<typeof import("../../components/EmptyState.vue")['default']>
   LazyHeroSection: LazyComponent<typeof import("../../components/HeroSection.vue")['default']>

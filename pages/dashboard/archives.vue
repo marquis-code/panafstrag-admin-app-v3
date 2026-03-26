@@ -29,6 +29,8 @@ const form = reactive({
   content: '',
   startDate: '',
   endDate: '',
+  startTime: '',
+  endTime: '',
   imageUrl: '',
   uploadedDocumentFiles: [] as string[],
   uploadedVideoUrl: '',
@@ -57,8 +59,20 @@ const formatedMonth = (m: number) => {
 const openCreate = () => {
   editingId.value = null
   Object.assign(form, { 
-    title: '', description: '', type: 'speech', date: '', year: new Date().getFullYear(), month: '', fileUrl: '', thumbnailUrl: '',
-    theme: '', content: '', startDate: '', endDate: '', imageUrl: '', uploadedDocumentFiles: [], uploadedVideoUrl: '',
+    title: '', description: '', type: 'speech',
+  date: '',
+  year: new Date().getFullYear(),
+  month: new Date().getMonth() + 1,
+  fileUrl: '',
+  thumbnailUrl: '',
+  theme: '',
+  content: '',
+  startDate: '',
+  endDate: '',
+  startTime: '',
+  endTime: '',
+  imageUrl: '',
+  uploadedDocumentFiles: [], uploadedVideoUrl: '',
     zoomMeetingUrl: '', googleMeetUrl: '', location: '', status: 'pending', registerLink: '', bannerImages: [], speakers: [], agenda: []
   })
   showModal.value = true
@@ -303,7 +317,6 @@ definePageMeta({
         </section>
 
         <!-- Program Specific Details -->
-        <template v-if="form.type === 'programme'">
           <section class="space-y-8">
             <div class="border-l-4 border-blue-600 pl-4">
               <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Program Details</h3>
@@ -367,15 +380,23 @@ definePageMeta({
             <div class="border-l-4 border-blue-600 pl-4">
               <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Time & Location</h3>
             </div>
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="flex flex-col gap-6">
               <div class="bg-white rounded-lg p-1 border border-gray-200 ">
                 <AnimatedInput v-model="form.location" label="Venue" />
               </div>
-              <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-                <CustomDatePicker v-model="form.startDate" label="Start Date" />
-              </div>
-              <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-                <CustomDatePicker v-model="form.endDate" label="End Date" />
+              <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg p-1 border border-gray-200 ">
+                  <CustomDatePicker v-model="form.startDate" label="Start Date" />
+                </div>
+                <div class="bg-white rounded-lg p-1 border border-gray-200 ">
+                  <CustomTimeSelect v-model="form.startTime" label="Start Time" />
+                </div>
+                <div class="bg-white rounded-lg p-1 border border-gray-200 ">
+                  <CustomDatePicker v-model="form.endDate" label="End Date" />
+                </div>
+                <div class="bg-white rounded-lg p-1 border border-gray-200 ">
+                  <CustomTimeSelect v-model="form.endTime" label="End Time" />
+                </div>
               </div>
             </div>
           </section>
@@ -556,9 +577,8 @@ definePageMeta({
               <AnimatedInput v-model="form.registerLink" label="Registration Link (Optional)" />
             </div>
           </section>
-        </template>
 
-        <section v-else class="space-y-8">
+        <section class="space-y-8">
           <div class="border-l-4 border-blue-600 pl-4">
             <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Summary</h3>
           </div>
@@ -573,7 +593,7 @@ definePageMeta({
           </div>
         </section>
 
-        <section v-if="form.type !== 'programme'" class="space-y-8 pb-4">
+        <section class="space-y-8 pb-4">
           <div class="border-l-4 border-blue-600 pl-4">
             <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Files & Settings</h3>
           </div>
