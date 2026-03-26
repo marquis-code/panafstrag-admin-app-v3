@@ -187,12 +187,12 @@ definePageMeta({
               <AnimatedInput 
                 v-model="form.name" 
                 label="Group Name" 
-                placeholder="e.g. Anglophone East Africa" 
+                
               />
               <AnimatedInput 
                 v-model="form.url" 
                 label="Website URL" 
-                placeholder="https://..." 
+                
               />
             </div>
             <div class="space-y-2 text-center">
@@ -215,7 +215,7 @@ definePageMeta({
               label="Brief Overview" 
               type="textarea" 
               :rows="4" 
-              placeholder="Provide a short description of this language group..." 
+              
             />
           </div>
         </section>

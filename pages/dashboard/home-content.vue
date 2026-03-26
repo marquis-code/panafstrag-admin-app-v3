@@ -204,8 +204,8 @@ definePageMeta({
         </div>
         <div class="p-6 space-y-6">
           <div class="grid md:grid-cols-2 gap-6">
-            <AnimatedInput v-model="form.aboutUsTitle" label="Title" placeholder="About Us" />
-            <AnimatedInput v-model="form.aboutUsSubTitle" label="Subtitle" placeholder="Who We Are" />
+            <AnimatedInput v-model="form.aboutUsTitle" label="Title" />
+            <AnimatedInput v-model="form.aboutUsSubTitle" label="Subtitle" />
           </div>
           <AnimatedInput v-model="form.aboutUsDescription" label="Main Description" type="textarea" :rows="4" />
           
@@ -324,7 +324,7 @@ definePageMeta({
               <div class="space-y-3">
                 <div v-for="(email, idx) in form.contactEmail" :key="'email-'+idx" class="flex items-center gap-2">
                   <div class="flex-1">
-                    <AnimatedInput v-model="form.contactEmail[idx]" :label="`Email ${idx + 1}`" placeholder="info@example.com" />
+                    <AnimatedInput v-model="form.contactEmail[idx]" :label="`Email ${idx + 1}`" />
                   </div>
                   <button @click="removeContactEmail(idx)" class="mt-6 p-2 text-gray-300 hover:text-red-500 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -349,7 +349,7 @@ definePageMeta({
               <div class="space-y-3">
                 <div v-for="(phone, idx) in form.contactPhone" :key="'phone-'+idx" class="flex items-center gap-2">
                   <div class="flex-1">
-                    <AnimatedInput v-model="form.contactPhone[idx]" :label="`Phone ${idx + 1}`" placeholder="+234..." />
+                    <AnimatedInput v-model="form.contactPhone[idx]" :label="`Phone ${idx + 1}`" />
                   </div>
                   <button @click="removeContactPhone(idx)" class="mt-6 p-2 text-gray-300 hover:text-red-500 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -383,8 +383,8 @@ definePageMeta({
                   </svg>
                 </button>
                 <div class="space-y-3">
-                  <AnimatedInput v-model="link.platform" label="Platform" placeholder="LinkedIn" />
-                  <AnimatedInput v-model="link.url" label="Link" placeholder="https://..." />
+                  <AnimatedInput v-model="link.platform" label="Platform" />
+                  <AnimatedInput v-model="link.url" label="Link" />
                 </div>
               </div>
             </div>
@@ -449,8 +449,8 @@ definePageMeta({
                 </svg>
               </button>
               <div class="grid grid-cols-2 gap-4">
-                <AnimatedInput v-model="item.label" label="Label" placeholder="Programs" />
-                <AnimatedInput v-model="item.path" label="Path" placeholder="/programs" />
+                <AnimatedInput v-model="item.label" label="Label" />
+                <AnimatedInput v-model="item.path" label="Path" />
               </div>
             </div>
           </div>
@@ -476,8 +476,8 @@ definePageMeta({
                 </svg>
               </button>
               <div class="grid grid-cols-2 gap-4">
-                <AnimatedInput v-model="item.label" label="Label" placeholder="Board" />
-                <AnimatedInput v-model="item.path" label="Path" placeholder="/board" />
+                <AnimatedInput v-model="item.label" label="Label" />
+                <AnimatedInput v-model="item.path" label="Path" />
               </div>
             </div>
           </div>
@@ -512,8 +512,8 @@ definePageMeta({
               <div class="grid md:grid-cols-2 gap-8">
                 <div class="space-y-4">
                   <div class="text-sm font-bold text-gray-300">#{{ index + 1 }}</div>
-                  <AnimatedInput v-model="slide.title" label="Slide Title" placeholder="Enter headline..." />
-                  <AnimatedInput v-model="slide.description" label="Slide Description" type="textarea" :rows="3" placeholder="Enter text..." />
+                  <AnimatedInput v-model="slide.title" label="Slide Title" />
+                  <AnimatedInput v-model="slide.description" label="Slide Description" type="textarea" :rows="3" />
                 </div>
                 <div class="space-y-4">
                   <label class="block text-xs font-bold text-gray-500">Slide Image</label>

@@ -208,7 +208,7 @@
   const selectedLabel = computed(() => {
     const found = props.options.find((opt) => {
       const optValue = getValue(opt)
-      return optValue === props.modelValue
+      return String(optValue) === String(props.modelValue)
     })
     return found ? getLabel(found) : ''
   })
@@ -216,7 +216,7 @@
   const selectedOption = computed(() => {
     return props.options.find((opt) => {
       const optValue = getValue(opt)
-      return optValue === props.modelValue
+      return String(optValue) === String(props.modelValue)
     })
   })
   

@@ -169,7 +169,7 @@ definePageMeta({
               label="Objective Description" 
               type="textarea" 
               :rows="5" 
-              placeholder="Describe this mission objective in detail..." 
+              
             />
           </div>
         </section>

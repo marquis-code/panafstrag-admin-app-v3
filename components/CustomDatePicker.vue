@@ -202,9 +202,28 @@ const currentYear = ref(new Date().getFullYear())
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 
+const syncPickerToValue = () => {
+  if (props.modelValue) {
+    const d = new Date(props.modelValue)
+    if (!isNaN(d.getTime())) {
+      currentMonth.value = d.getMonth()
+      currentYear.value = d.getFullYear()
+    }
+  }
+}
+
+watch(() => props.modelValue, syncPickerToValue)
+
+onMounted(() => {
+  syncPickerToValue()
+  if (props.modelValue && props.type === 'time') {
+    // Parse initial time if exists
+  }
+})
+
 const yearRange = computed(() => {
   const current = new Date().getFullYear()
-  return Array.from({ length: 111 }, (_, i) => current - 100 + i)
+  return Array.from({ length: 121 }, (_, i) => current - 100 + i)
 })
 
 const calendarDays = computed(() => {
@@ -328,12 +347,6 @@ const valMin = () => {
   if (isNaN(m) || m < 0 || m > 59) m = 0
   selectedMinute.value = String(m).padStart(2, '0')
 }
-
-onMounted(() => {
-  if (props.modelValue && props.type === 'time') {
-    // Parse initial time if exists
-  }
-})
 </script>
 
 <style scoped>

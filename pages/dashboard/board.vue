@@ -206,14 +206,14 @@ definePageMeta({
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-6">
               <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-                <AnimatedInput v-model="form.name" label="Full Name" placeholder="e.g. Dr. Sarah Johnson" />
+                <AnimatedInput v-model="form.name" label="Full Name" />
               </div>
               <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-                <AnimatedInput v-model="form.position" label="Position" placeholder="e.g. Executive Director" />
+                <AnimatedInput v-model="form.position" label="Position" />
               </div>
               <div class="bg-white rounded-lg p-4 border border-gray-200 ">
                  <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Date Joined</label>
-                 <CustomDatePicker v-model="form.dateJoined" placeholder="Select Date" />
+                 <CustomDatePicker v-model="form.dateJoined" />
               </div>
             </div>
             <div>
@@ -230,13 +230,13 @@ definePageMeta({
           </div>
           <div class="grid md:grid-cols-3 gap-6">
             <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-              <AnimatedInput v-model="form.university" label="University" placeholder="e.g. University of Lagos" />
+              <AnimatedInput v-model="form.university" label="University" />
             </div>
             <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-              <AnimatedInput v-model="form.faculty" label="Faculty" placeholder="e.g. Social Sciences" />
+              <AnimatedInput v-model="form.faculty" label="Faculty" />
             </div>
             <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-              <AnimatedInput v-model="form.department" label="Department" placeholder="e.g. Political Science" />
+              <AnimatedInput v-model="form.department" label="Department" />
             </div>
           </div>
         </section>
@@ -248,7 +248,7 @@ definePageMeta({
             <h4 class="text-xs font-bold uppercase tracking-wider text-blue-700 pb-2 border-b border-gray-200">Email Addresses</h4>
             <div class="flex gap-2">
               <div class="flex-1 bg-white rounded-lg p-1 border border-gray-200">
-                <AnimatedInput v-model="emailInput" label="Add Email" placeholder="name@domain.com" @keyup.enter="() => { if(emailInput) { form.email.push(emailInput); emailInput = '' } }" />
+                <AnimatedInput v-model="emailInput" label="Add Email" @keyup.enter="() => { if(emailInput) { form.email.push(emailInput); emailInput = '' } }" />
               </div>
               <button type="button" @click="() => { if(emailInput) { form.email.push(emailInput); emailInput = '' } }" class="p-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all ">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -274,7 +274,7 @@ definePageMeta({
             <h4 class="text-xs font-bold uppercase tracking-wider text-blue-700 pb-2 border-b border-gray-200">Responsibilities</h4>
             <div class="flex gap-2">
               <div class="flex-1 bg-white rounded-lg p-1 border border-gray-200">
-                <AnimatedInput v-model="dutyInput" label="Add Responsibility" placeholder="e.g. Project Oversight" @keyup.enter="addDuty" />
+                <AnimatedInput v-model="dutyInput" label="Add Responsibility" @keyup.enter="addDuty" />
               </div>
               <button type="button" @click="addDuty" class="p-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all ">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -302,7 +302,7 @@ definePageMeta({
             <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Biography</h3>
           </div>
           <div class="bg-white rounded-lg p-1 border border-gray-200  overflow-hidden">
-             <RichTextEditor v-model="form.bio" placeholder="Provide a brief overview of the member's background..." />
+             <RichTextEditor v-model="form.bio" />
           </div>
         </section>
       </div>

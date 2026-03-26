@@ -169,7 +169,7 @@ definePageMeta({
               label="Responsibility Description" 
               type="textarea" 
               :rows="5" 
-              placeholder="Describe this responsibility or mandate in detail..." 
+              
             />
           </div>
         </section>

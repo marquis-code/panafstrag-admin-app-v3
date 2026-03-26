@@ -13,14 +13,14 @@
           v-model="form.name"
           label="Full Name"
           type="text"
-          placeholder="e.g. Adebayo Williams"
+         
         />
 
         <AnimatedInput 
           v-model="form.email"
           label="Email Address"
           type="email"
-          placeholder="admin@panafstrag.org"
+         
           :error-message="registerError || ''"
           :show-error="!!registerError"
         />
@@ -29,7 +29,7 @@
           v-model="form.password"
           label="Password"
           type="password"
-          placeholder="••••••••"
+         
         />
       </div>
 

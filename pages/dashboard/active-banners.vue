@@ -209,7 +209,7 @@ definePageMeta({
           v-model="form.programId" 
           label="Program" 
           :options="programOptions"
-          placeholder="Select a program..." 
+          
         />
 
         <div class="grid md:grid-cols-2 gap-4">

@@ -129,7 +129,7 @@
       <div class="space-y-6 p-4">
         <section class="space-y-6">
           <div class="grid md:grid-cols-2 gap-6">
-            <AnimatedInput v-model="form.key" label="Name / Reference" placeholder="e.g. welcome_message" />
+            <AnimatedInput v-model="form.key" label="Name / Reference" />
             <SelectInput 
               v-model="form.type" 
               label="Reply Type" 
@@ -142,17 +142,17 @@
             />
           </div>
 
-          <AnimatedInput v-model="form.message" label="Message" type="textarea" placeholder="Enter the text the assistant should say..." />
+          <AnimatedInput v-model="form.message" label="Message" type="textarea" />
           
           <div v-if="form.type === 'page_trigger'">
-            <AnimatedInput v-model="form.pagePath" label="Page Path" placeholder="e.g. /programs" />
+            <AnimatedInput v-model="form.pagePath" label="Page Path" />
           </div>
 
           <div v-if="form.type === 'faq'">
-            <AnimatedInput v-model="form.keywords" label="Trigger Keywords (comma separated)" placeholder="e.g. help, contact, join" />
+            <AnimatedInput v-model="form.keywords" label="Trigger Keywords (comma separated)" />
           </div>
 
-          <AnimatedInput v-model="form.quickReplies" label="Quick Reply Buttons (comma separated)" placeholder="e.g. Learn More, Get in Touch" />
+          <AnimatedInput v-model="form.quickReplies" label="Quick Reply Buttons (comma separated)" />
 
           <div class="grid md:grid-cols-2 gap-6">
             <AnimatedInput v-model.number="form.delayMs" label="Delay (ms)" type="number" />

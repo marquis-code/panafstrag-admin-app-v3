@@ -161,7 +161,7 @@ definePageMeta({
               <AnimatedInput 
                 v-model="form.name" 
                 label="Area Name" 
-                placeholder="e.g. Governance & Security" 
+                
               />
             </div>
             <div class="bg-white rounded-lg p-1 border border-gray-200 ">
@@ -170,7 +170,7 @@ definePageMeta({
                 label="Description" 
                 type="textarea" 
                 :rows="5" 
-                placeholder="Describe the research objectives and scope of this focus area..." 
+                
               />
             </div>
           </div>

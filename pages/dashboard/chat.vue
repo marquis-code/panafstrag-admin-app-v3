@@ -187,7 +187,7 @@ definePageMeta({
           <input 
             v-model="searchBatch"
             type="text" 
-            placeholder="Search chats..." 
+            
             class="w-full bg-gray-50 border border-gray-100 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-900 outline-none focus:bg-white focus:border-blue-500 transition-all placeholder:text-gray-300"
           />
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -336,7 +336,7 @@ definePageMeta({
               @keypress="handleTyping"
               @keyup.enter.exact.prevent="handleSend"
               rows="1"
-              placeholder="Type a message..."
+             
               class="flex-1 bg-transparent px-2 py-3 text-sm font-bold text-gray-900 outline-none border-none placeholder:text-gray-300 resize-none max-h-40"
               @input="(e) => {
                 const target = e.target as HTMLTextAreaElement;

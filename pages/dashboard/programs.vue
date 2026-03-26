@@ -292,8 +292,8 @@ definePageMeta({
           
           <div class="grid lg:grid-cols-2 gap-8">
             <div class="space-y-6">
-              <AnimatedInput v-model="form.title" label="Title" placeholder="e.g. Annual Summit 2024" />
-              <AnimatedInput v-model="form.theme" label="Theme" placeholder="e.g. Sustainable Development" />
+              <AnimatedInput v-model="form.title" label="Title" />
+              <AnimatedInput v-model="form.theme" label="Theme" />
               <div class="grid grid-cols-2 gap-4">
                 <SelectInput 
                   v-model="form.type" 
@@ -322,10 +322,10 @@ definePageMeta({
             <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Schedule</h3>
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <AnimatedInput v-model="form.location" label="Venue" placeholder="e.g. Lagos, Nigeria" />
-            <AnimatedInput v-model="form.startDate" label="Start (e.g. OCT 24)" placeholder="OCT 24" />
-            <AnimatedInput v-model="form.endDate" label="End (e.g. OCT 28)" placeholder="OCT 28" />
-            <CustomDatePicker v-model="form.date" label="Date" placeholder="Select date" />
+            <AnimatedInput v-model="form.location" label="Venue" />
+            <CustomDatePicker v-model="form.startDate" label="Start Date" />
+            <CustomDatePicker v-model="form.endDate" label="End Date" />
+            <CustomDatePicker v-model="form.date" label="Date" />
           </div>
           <div class="grid md:grid-cols-2 gap-6 bg-gray-50 p-6 rounded-lg border border-gray-200">
             <SelectInput v-model="form.year" label="Year" :options="yearOptions" />
@@ -339,9 +339,9 @@ definePageMeta({
             <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Meeting & Video Links</h3>
           </div>
           <div class="grid md:grid-cols-3 gap-6">
-            <AnimatedInput v-model="form.uploadedVideoUrl" label="YouTube Video Link" placeholder="https://youtube.com/..." />
-            <AnimatedInput v-model="form.zoomMeetingUrl" label="Zoom Link" placeholder="https://zoom.us/j/..." />
-            <AnimatedInput v-model="form.googleMeetUrl" label="Google Meet Link" placeholder="https://meet.google.com/..." />
+            <AnimatedInput v-model="form.uploadedVideoUrl" label="YouTube Video Link" />
+            <AnimatedInput v-model="form.zoomMeetingUrl" label="Zoom Link" />
+            <AnimatedInput v-model="form.googleMeetUrl" label="Google Meet Link" />
           </div>
         </section>
 
@@ -351,7 +351,7 @@ definePageMeta({
             <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Content</h3>
           </div>
           <div class="space-y-6">
-            <AnimatedInput v-model="form.description" label="Summary" type="textarea" :rows="3" placeholder="A brief overview..." />
+            <AnimatedInput v-model="form.description" label="Summary" type="textarea" :rows="3" />
             <div class="space-y-2">
               <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider">Details</label>
               <div class="bg-white border border-gray-200 rounded-lg overflow-hidden  p-1">
@@ -404,9 +404,9 @@ definePageMeta({
                     <MediaUpload v-model="speaker.imageUrl" folder="speakers" />
                   </div>
                   <div class="flex-1 space-y-4">
-                    <AnimatedInput v-model="speaker.name" label="Speaker Name" placeholder="Name" />
-                    <AnimatedInput v-model="speaker.role" label="Role / Title" placeholder="Designation" />
-                    <AnimatedInput v-model="speaker.bio" label="Biography" type="textarea" :rows="2" placeholder="Brief bio..." />
+                    <AnimatedInput v-model="speaker.name" label="Speaker Name" />
+                    <AnimatedInput v-model="speaker.role" label="Role / Title" />
+                    <AnimatedInput v-model="speaker.bio" label="Biography" type="textarea" :rows="2" />
                   </div>
                 </div>
               </div>
@@ -428,10 +428,10 @@ definePageMeta({
                 <div class="space-y-4">
                   <div class="flex items-center gap-4">
                     <div class="w-8 h-8 bg-blue-600 text-white flex items-center justify-center rounded-lg font-bold text-xs">{{ idx + 1 }}</div>
-                    <AnimatedInput v-model="item.time" label="Time" placeholder="e.g. 09:00 AM" class="flex-1" />
+                    <AnimatedInput v-model="item.time" label="Time" class="flex-1" />
                   </div>
-                  <AnimatedInput v-model="item.title" label="Session title" placeholder="e.g. Opening Remarks" />
-                  <AnimatedInput v-model="item.description" label="Session description" placeholder="Short summary..." />
+                  <AnimatedInput v-model="item.title" label="Session title" />
+                  <AnimatedInput v-model="item.description" label="Session description" />
                 </div>
               </div>
             </div>
@@ -461,7 +461,7 @@ definePageMeta({
                    <p class="mt-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest pointer-events-none">Add Document</p>
                 </div>
              </div>
-             <AnimatedInput v-model="form.registerLink" label="External Registration Link" placeholder="https://..." />
+             <AnimatedInput v-model="form.registerLink" label="External Registration Link" />
           </div>
         </section>
       </div>v>

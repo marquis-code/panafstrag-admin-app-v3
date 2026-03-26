@@ -166,14 +166,14 @@ definePageMeta({
     <!-- Modal -->
     <Modal :show="showModal" :title="editingId ? 'Edit Node' : 'Add New Node'" @close="showModal = false">
       <div class="space-y-6 p-4">
-        <AnimatedInput v-model="form.title" label="Name" placeholder="e.g. Executive Board" />
+        <AnimatedInput v-model="form.title" label="Name" />
         
         <div class="grid grid-cols-2 gap-4">
           <AnimatedInput v-model.number="form.level" label="Level" type="number" />
           <AnimatedInput v-model.number="form.order" label="Order" type="number" />
         </div>
 
-        <AnimatedInput v-model="form.parentId" label="Parent ID" placeholder="Leave empty for top level" />
+        <AnimatedInput v-model="form.parentId" label="Parent ID" />
         
         <AnimatedInput v-model="form.description" label="Description" type="textarea" :rows="4" />
       </div>

@@ -190,17 +190,17 @@ definePageMeta({
               <AnimatedInput 
                 v-model="form.name" 
                 label="Hub Name" 
-                placeholder="e.g. West African Research Hub" 
+                
               />
               <AnimatedInput 
                 v-model="form.location" 
                 label="Location" 
-                placeholder="e.g. Lagos, Nigeria" 
+                
               />
               <AnimatedInput 
                 v-model="form.leadName" 
                 label="Lead Person Name" 
-                placeholder="e.g. Prof. Adebayo Smith" 
+                
               />
             </div>
             <div class="space-y-2 text-center">
@@ -218,7 +218,7 @@ definePageMeta({
             <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Description</h3>
           </div>
           <div class="bg-white rounded-lg p-1 border border-gray-200 ">
-             <RichTextEditor v-model="form.description" placeholder="Describe the objectives and reach of this research hub..." />
+             <RichTextEditor v-model="form.description" />
           </div>
         </section>
       </div>

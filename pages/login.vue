@@ -13,7 +13,7 @@
           v-model="form.email"
           label="Email Address"
           type="email"
-          placeholder="admin@panafstrag.org"
+         
           :error-message="authError || ''"
           :show-error="!!authError"
         />
@@ -22,7 +22,7 @@
           v-model="form.password"
           label="Password"
           type="password"
-          placeholder="••••••••"
+         
         />
       </div>
 
