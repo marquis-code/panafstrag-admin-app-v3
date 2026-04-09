@@ -41,8 +41,19 @@ const form = reactive({
   registerLink: '',
   bannerImages: [] as string[],
   speakers: [] as { name: string; role: string; bio: string; imageUrl: string }[],
-  agenda: [] as { time: string; title: string; description: string }[]
+  agenda: [] as { time: string; title: string; description: string }[],
+  sectionOrder: [] as string[]
 })
+
+const availableSections = [
+  { id: 'description', label: 'Main Description' },
+  { id: 'speakers', label: 'Speakers & Panel' },
+  { id: 'agenda', label: 'Program Agenda' },
+  { id: 'documents', label: 'Document Resources' },
+  { id: 'gallery', label: 'Image Gallery' },
+  { id: 'video', label: 'Video Showcase' }
+]
+
 const loading = ref(false)
 const docInput = ref('')
 
@@ -73,7 +84,8 @@ const openCreate = () => {
   endTime: '',
   imageUrl: '',
   uploadedDocumentFiles: [], uploadedVideoUrl: '',
-    zoomMeetingUrl: '', googleMeetUrl: '', location: '', status: 'pending', registerLink: '', bannerImages: [], speakers: [], agenda: []
+    zoomMeetingUrl: '', googleMeetUrl: '', location: '', status: 'pending', registerLink: '', bannerImages: [], speakers: [], agenda: [],
+    sectionOrder: ['description', 'speakers', 'agenda', 'documents', 'gallery', 'video']
   })
   showModal.value = true
 }
@@ -86,7 +98,8 @@ const openEdit = (archive: any) => {
     speakers: archive.speakers || [],
     agenda: archive.agenda || [],
     bannerImages: archive.bannerImages || [],
-    uploadedDocumentFiles: archive.uploadedDocumentFiles || []
+    uploadedDocumentFiles: archive.uploadedDocumentFiles || [],
+    sectionOrder: archive.sectionOrder?.length ? archive.sectionOrder : ['description', 'speakers', 'agenda', 'documents', 'gallery', 'video']
   })
   showModal.value = true
 }
@@ -592,6 +605,47 @@ definePageMeta({
             />
           </div>
         </section>
+
+        <!-- Section Reordering -->
+        <section class="space-y-6">
+            <div class="border-l-4 border-blue-600 pl-4">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Page Section Order</h3>
+              <p class="text-[10px] text-gray-400 font-bold uppercase mt-1">Reorder how sections appear on the website</p>
+            </div>
+            
+            <div class="space-y-3 max-w-lg">
+              <div v-for="(sectionId, idx) in form.sectionOrder" :key="sectionId" 
+                class="flex items-center justify-between p-4 bg-gray-50 border border-gray-200 rounded-xl group hover:border-blue-200 transition-all">
+                <div class="flex items-center gap-4">
+                  <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-xs font-black text-blue-600 shadow-sm">
+                    {{ idx + 1 }}
+                  </div>
+                  <span class="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                    {{ availableSections.find(s => s.id === sectionId)?.label || sectionId }}
+                  </span>
+                </div>
+                
+                <div class="flex items-center gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
+                  <button 
+                    type="button"
+                    @click="idx > 0 && (form.sectionOrder.splice(idx - 1, 2, form.sectionOrder[idx], form.sectionOrder[idx-1]))"
+                    :disabled="idx === 0"
+                    class="p-2 hover:bg-white hover:text-blue-600 rounded-lg transition-all disabled:opacity-0"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" /></svg>
+                  </button>
+                  <button 
+                    type="button"
+                    @click="idx < form.sectionOrder.length - 1 && (form.sectionOrder.splice(idx, 2, form.sectionOrder[idx+1], form.sectionOrder[idx]))"
+                    :disabled="idx === form.sectionOrder.length - 1"
+                    class="p-2 hover:bg-white hover:text-blue-600 rounded-lg transition-all disabled:opacity-0"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
 
         <section class="space-y-8 pb-4">
           <div class="border-l-4 border-blue-600 pl-4">
