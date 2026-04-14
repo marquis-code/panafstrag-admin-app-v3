@@ -115,8 +115,8 @@
       </header>
 
       <!-- Main Content Area -->
-      <main class="flex-1 overflow-y-auto bg-white custom-scrollbar relative p-6 sm:p-10 lg:p-12">
-        <div class="max-w-7xl mx-auto">
+      <main class="flex-1 overflow-y-auto bg-white custom-scrollbar relative p-6">
+        <div class="container mx-auto">
           <slot />
         </div>
       </main>
