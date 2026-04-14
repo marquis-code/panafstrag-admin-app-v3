@@ -111,7 +111,7 @@ definePageMeta({
       <div>
         <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Board Members</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Manage the members of the board, including their roles and affiliations.
+          Manage the members of Ubuntu Team, including their roles and affiliations.
         </p>
       </div>
       <button 
