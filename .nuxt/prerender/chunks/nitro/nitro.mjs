@@ -648,7 +648,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "5243293f-5d6e-42b7-9b5b-c93322c4c550",
+    "buildId": "a4597495-7cbd-44ba-b19b-2ead52d9c5df",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -676,7 +676,7 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
-    "apiBase": "http://localhost:3000"
+    "apiBase": "https://panafstrag-backend-app-v3.onrender.com"
   }
 };
 const envOptions = {
