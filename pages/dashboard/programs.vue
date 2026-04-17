@@ -46,6 +46,8 @@ const form = reactive({
   startDate: '',
   endDate: '',
   date: '',
+  startTime: '12:00 PM',
+  endTime: '12:00 PM',
   imageUrl: '',
   uploadedDocumentFiles: [] as string[],
   uploadedVideoUrl: '',
@@ -60,6 +62,47 @@ const form = reactive({
   speakers: [] as { name: string; role: string; bio: string; imageUrl: string }[],
   agenda: [] as { time: string; title: string; description: string }[],
   sectionOrder: ['documents', 'description', 'speakers', 'video', 'agenda', 'gallery']
+})
+
+const combineDateTime = (dateStr: string, timeStr: string) => {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return dateStr;
+  
+  if (!timeStr) return date.toISOString();
+  
+  const [time, period] = timeStr.split(' ');
+  let [hours, minutes] = time.split(':').map(Number);
+  
+  if (period === 'PM' && hours < 12) hours += 12;
+  if (period === 'AM' && hours === 12) hours = 0;
+  
+  date.setHours(hours, minutes, 0, 0);
+  return date.toISOString();
+};
+
+const parseTime = (dateStr: string) => {
+  if (!dateStr) return '12:00 PM';
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return '12:00 PM';
+  
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const period = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')} ${period}`;
+};
+
+watch(() => form.startDate, (newDate) => {
+  if (newDate && !editingId.value) {
+    const d = new Date(newDate)
+    if (!isNaN(d.getTime())) {
+      form.year = d.getFullYear().toString()
+      form.month = (d.getMonth() + 1).toString()
+      form.date = newDate
+    }
+  }
 })
 
 const draggedIndex = ref<number | null>(null)
@@ -123,10 +166,10 @@ watch([filterType, filterYear, filterMonth], fetchWithFilters)
 
 const resetForm = () => ({
   title: '', theme: '', description: '', content: '', type: 'upcoming',
-  startDate: '', endDate: '', date: '', imageUrl: '',
+  startDate: '', endDate: '', date: '', startTime: '12:00 PM', endTime: '12:00 PM', imageUrl: '',
   uploadedDocumentFiles: [], uploadedVideoUrl: '', zoomMeetingUrl: '',
   googleMeetUrl: '', location: '', status: 'pending', registerLink: '',
-  year: new Date().getFullYear(), month: new Date().getMonth() + 1,
+  year: new Date().getFullYear().toString(), month: (new Date().getMonth() + 1).toString(),
   bannerImages: [], speakers: [], agenda: [],
   sectionOrder: ['documents', 'description', 'speakers', 'video', 'agenda', 'gallery']
 })
@@ -144,6 +187,10 @@ const openEdit = (program: any) => {
   Object.assign(form, {
     ...program,
     date: program.date ? new Date(program.date).toISOString().split('T')[0] : '',
+    startDate: program.startDate || '',
+    endDate: program.endDate || '',
+    startTime: parseTime(program.startDate || program.date),
+    endTime: parseTime(program.endDate),
     year: (program.year || new Date(program.date || Date.now()).getFullYear()).toString(),
     month: (program.month || (new Date(program.date || Date.now()).getMonth() + 1)).toString(),
     speakers: program.speakers || [],
@@ -160,10 +207,17 @@ const openEdit = (program: any) => {
 const handleSubmit = async () => {
   loading.value = true
   try {
+    const payload = { ...form }
+    payload.startDate = combineDateTime(form.startDate, form.startTime)
+    payload.endDate = combineDateTime(form.endDate, form.endTime)
+    payload.date = payload.startDate || new Date().toISOString()
+    payload.year = Number(form.year)
+    payload.month = Number(form.month)
+
     if (editingId.value) {
-      await updateProgram(editingId.value, form)
+      await updateProgram(editingId.value, payload)
     } else {
-      await createProgram(form)
+      await createProgram(payload)
     }
     await fetchPrograms()
     showModal.value = false
@@ -294,7 +348,10 @@ definePageMeta({
                 </div>
               </td>
               <td class="px-6 py-5 text-center text-sm font-medium text-gray-600">
-                {{ new Date(program.date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) }}
+                {{ program.date ? new Date(program.date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : 'N/A' }}
+                <div v-if="program.date" class="text-[10px] text-gray-400 mt-1 font-bold">
+                  {{ new Date(program.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) }}
+                </div>
               </td>
               <td class="px-6 py-5 text-right">
                 <div class="flex items-center justify-end gap-2">
@@ -419,13 +476,19 @@ definePageMeta({
                <MapPin :size="20" class="text-gray-400" />
                <AnimatedInput v-model="form.location" label="Venue/location" />
              </div>
-             <div class="bg-gray-50 p-6 rounded-2xl space-y-6 border border-gray-100">
-               <Calendar :size="20" class="text-gray-400" />
-               <div class="grid gap-4">
-                 <CustomDatePicker v-model="form.startDate" label="Start date" />
-                 <CustomDatePicker v-model="form.endDate" label="End date" />
-               </div>
-             </div>
+              <div class="bg-gray-50 p-6 rounded-2xl space-y-6 border border-gray-100">
+                <Calendar :size="20" class="text-gray-400" />
+                <div class="grid gap-6">
+                  <div class="grid grid-cols-2 gap-4">
+                    <CustomDatePicker v-model="form.startDate" label="Start date" />
+                    <CustomTimeSelect v-model="form.startTime" label="Start time" />
+                  </div>
+                  <div class="grid grid-cols-2 gap-4">
+                    <CustomDatePicker v-model="form.endDate" label="End date" />
+                    <CustomTimeSelect v-model="form.endTime" label="End time" />
+                  </div>
+                </div>
+              </div>
              <div class="bg-gray-50 p-6 rounded-2xl space-y-6 border border-gray-100">
                <Hash :size="20" class="text-gray-400" />
                <div class="grid gap-4">
