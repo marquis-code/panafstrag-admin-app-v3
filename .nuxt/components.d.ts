@@ -22,6 +22,7 @@ export const CustomTimeSelect: typeof import("../components/CustomTimeSelect.vue
 export const DocumentUpload: typeof import("../components/DocumentUpload.vue")['default']
 export const EmptyState: typeof import("../components/EmptyState.vue")['default']
 export const HeroSection: typeof import("../components/HeroSection.vue")['default']
+export const LanguageSwitcher: typeof import("../components/LanguageSwitcher.vue")['default']
 export const LoadingState: typeof import("../components/LoadingState.vue")['default']
 export const Logo: typeof import("../components/Logo.vue")['default']
 export const MediaUpload: typeof import("../components/MediaUpload.vue")['default']
@@ -60,6 +61,7 @@ export const LazyCustomTimeSelect: LazyComponent<typeof import("../components/Cu
 export const LazyDocumentUpload: LazyComponent<typeof import("../components/DocumentUpload.vue")['default']>
 export const LazyEmptyState: LazyComponent<typeof import("../components/EmptyState.vue")['default']>
 export const LazyHeroSection: LazyComponent<typeof import("../components/HeroSection.vue")['default']>
+export const LazyLanguageSwitcher: LazyComponent<typeof import("../components/LanguageSwitcher.vue")['default']>
 export const LazyLoadingState: LazyComponent<typeof import("../components/LoadingState.vue")['default']>
 export const LazyLogo: LazyComponent<typeof import("../components/Logo.vue")['default']>
 export const LazyMediaUpload: LazyComponent<typeof import("../components/MediaUpload.vue")['default']>
