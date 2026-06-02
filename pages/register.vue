@@ -1,9 +1,9 @@
 <template>
   <div class="space-y-8 py-4">
     <div class="space-y-2 text-center lg:text-left">
-      <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Create Account</h2>
+      <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Create Account') }}</h2>
       <p class="text-gray-500 font-medium text-sm leading-relaxed max-w-sm">
-        Create an account to start managing the platform.
+        {{ t('Create an account to start managing the platform.') }}
       </p>
     </div>
 
@@ -36,7 +36,7 @@
       <div class="flex items-start gap-2">
         <input type="checkbox" required id="terms" class="custom-checkbox" />
         <label for="terms" class="text-xs font-medium text-gray-500 leading-relaxed cursor-pointer">
-          I agree to the <a href="#" class="text-blue-600 font-bold hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 font-bold hover:underline">Privacy Policy</a>.
+          {{ t('I agree to the') }} <a href="#" class="text-blue-600 font-bold hover:underline">{{ t('Terms of Service') }}</a> {{ t('and') }} <a href="#" class="text-blue-600 font-bold hover:underline">{{ t('Privacy Policy') }}</a>.
         </label>
       </div>
 
@@ -47,7 +47,7 @@
       >
         <div v-if="registerLoading" class="h-5 w-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
         <template v-else>
-          <span>Create Account</span>
+          <span>{{ t('Create Account') }}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
@@ -71,6 +71,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { reactive } from 'vue'
 import { useRegister } from '@/composables/modules/auth/useRegister'
 

@@ -15,7 +15,7 @@
           {{ getFileName(modelValue) }}
         </p>
         <button @click="removeFile" class="mt-4 text-[9px] font-black text-red-500 uppercase tracking-widest hover:underline">
-          Remove Document
+          {{ t('Remove Document') }}
         </button>
       </div>
       
@@ -25,13 +25,13 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
         </div>
-        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Drop PDF, Excel, Word or PPT</p>
+        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">{{ t('Drop PDF, Excel, Word or PPT') }}</p>
         <input type="file" @change="handleFileSelect" class="absolute inset-0 opacity-0 cursor-pointer" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" />
       </div>
 
       <div v-if="loading" class="relative z-10 flex flex-col items-center">
         <div class="w-10 h-10 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-        <p class="text-[9px] font-black text-black mt-6 uppercase tracking-[0.4em]">Optimizing & Uploading</p>
+        <p class="text-[9px] font-black text-black mt-6 uppercase tracking-[0.4em]">{{ t('Optimizing & Uploading') }}</p>
       </div>
     </div>
     <div v-if="uploadError" class="text-[9px] font-black text-red-600 uppercase tracking-widest">{{ uploadError }}</div>
@@ -39,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref } from 'vue'
 import { useUploadFile } from '@/composables/media/useUploadFile'
 

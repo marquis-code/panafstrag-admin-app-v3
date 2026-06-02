@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive } from 'vue'
 import { useFetchFocusAreas } from '@/composables/modules/focusAreas/useFetchFocusAreas'
 import { useCreateFocusArea } from '@/composables/modules/focusAreas/useCreateFocusArea'
@@ -76,9 +78,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Focus Areas</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Focus Areas') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Manage the main research topics and focus areas.
+          {{ t('Manage the main research topics and focus areas.') }}
         </p>
       </div>
       <button 
@@ -88,7 +90,7 @@ definePageMeta({
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        Add Area
+        {{ t('Add Area') }}
       </button>
     </div>
 
@@ -154,7 +156,7 @@ definePageMeta({
       <div class="space-y-8 py-8 px-6">
         <section class="space-y-6">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Details</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Details') }}</h3>
           </div>
           <div class="space-y-6">
             <div class="bg-white rounded-lg p-1 border border-gray-200 ">
@@ -183,7 +185,7 @@ definePageMeta({
             @click="showModal = false" 
             class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900"
           >
-            Cancel
+            {{ t('Cancel') }}
           </button>
           <button 
             @click="handleSubmit" 

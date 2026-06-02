@@ -10,22 +10,22 @@
           <div class="space-y-4">
             <div class="flex items-center justify-center gap-2">
                <div class="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
-               <p class="text-[10px] font-bold uppercase tracking-widest text-blue-200">Admin Management Portal</p>
+               <p class="text-[10px] font-bold uppercase tracking-widest text-blue-200">{{ t('Admin Management Portal') }}</p>
             </div>
             <h1 class="text-4xl font-black text-white tracking-tight leading-tight">
-              PANAFSTRAG <span class="text-blue-300">Admin</span>
+              {{ t('PANAFSTRAG') }} <span class="text-blue-300">{{ t('Admin') }}</span>
             </h1>
           </div>
         </div>
 
         <p class="text-lg text-blue-100/80 font-medium leading-relaxed max-w-md mx-auto">
-          Access the administrative dashboard to manage content, programs, and research hubs.
+          {{ t('Access the administrative dashboard to manage content, programs, and research hubs.') }}
         </p>
 
         <div class="flex items-center justify-center gap-4 pt-4">
           <div class="px-5 py-2.5 bg-white/5 rounded-xl border border-white/10 flex items-center gap-2.5">
             <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-            <span class="text-[10px] font-bold text-white uppercase tracking-wider">Secure Access</span>
+            <span class="text-[10px] font-bold text-white uppercase tracking-wider">{{ t('Secure Access') }}</span>
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
         <div class="mt-20 pt-10 border-t border-gray-100 text-center lg:text-left space-y-6">
           <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-loose">
             &copy; {{ new Date().getFullYear() }} Pan-African Strategic and Policy Group. <br>
-            Authorized Personnel Only.
+            {{ t('Authorized Personnel Only.') }}
           </p>
           <div class="flex justify-center lg:justify-start gap-6">
             <template v-for="link in [
@@ -64,5 +64,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 // Institutional auth layout with dual-panel strategic design
 </script>

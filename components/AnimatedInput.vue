@@ -100,7 +100,7 @@
         >
           <div class="bg-gradient-to-br from-[#033958] to-[#055a8c] p-6 text-white">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-bold">Select Date</h3>
+              <h3 class="text-xl font-bold">{{ t('Select Date') }}</h3>
               <button 
                 type="button" 
                 @click.stop="closeDatePicker"
@@ -181,14 +181,14 @@
               @click.stop="setToday" 
               class="px-5 py-2.5 text-sm text-[#033958] hover:text-white hover:bg-[#033958] font-bold rounded-xl transition-all border-2 border-[#033958]"
             >
-              Today
+              {{ t('Today') }}
             </button>
             <button 
               type="button" 
               @click.stop="clearDateValue" 
               class="px-5 py-2.5 text-sm text-gray-600 hover:text-gray-800 font-semibold hover:bg-gray-100 rounded-xl transition-all"
             >
-              Clear
+              {{ t('Clear') }}
             </button>
           </div>
         </div>
@@ -208,7 +208,7 @@
         >
           <div class="bg-gradient-to-br from-[#033958] to-[#055a8c] p-6 text-white">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-bold">Select Time</h3>
+              <h3 class="text-xl font-bold">{{ t('Select Time') }}</h3>
               <button 
                 type="button" 
                 @click.stop="closeTimePicker"
@@ -284,7 +284,7 @@
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 ]"
               >
-                AM
+                {{ t('AM') }}
               </button>
               <button 
                 type="button" 
@@ -296,7 +296,7 @@
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 ]"
               >
-                PM
+                {{ t('PM') }}
               </button>
             </div>
           </div>
@@ -307,7 +307,7 @@
               @click.stop="setNow"
               class="px-5 py-2.5 text-sm text-[#033958] hover:text-white hover:bg-[#033958] font-bold rounded-xl transition-all border-2 border-[#033958]"
             >
-              Now
+              {{ t('Now') }}
             </button>
             <div class="flex gap-3">
               <button 
@@ -315,14 +315,14 @@
                 @click.stop="clearTimeValue"
                 class="px-5 py-2.5 text-sm text-gray-600 hover:text-gray-800 font-semibold hover:bg-gray-100 rounded-xl transition-all"
               >
-                Clear
+                {{ t('Clear') }}
               </button>
               <button 
                 type="button" 
                 @click.stop="confirmTimeValue"
                 class="px-6 py-2.5 text-sm text-white bg-[#033958] hover:bg-[#022f42] rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
               >
-                Confirm
+                {{ t('Confirm') }}
               </button>
             </div>
           </div>
@@ -343,7 +343,7 @@
         >
           <div class="bg-gradient-to-br from-[#033958] to-[#055a8c] p-6 text-white">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-2xl font-bold">Select Date & Time</h3>
+              <h3 class="text-2xl font-bold">{{ t('Select Date & Time') }}</h3>
               <button 
                 type="button" 
                 @click.stop="closeDateTimePicker"
@@ -362,7 +362,7 @@
           <div class="p-6 md:p-8 grid md:grid-cols-2 gap-8">
             <div>
               <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
-                <span class="p-2 bg-[#033958]/10 rounded-lg">📅</span> DATE
+                <span class="p-2 bg-[#033958]/10 rounded-lg">📅</span> {{ t('DATE') }}
               </h4>
               
               <div class="flex items-center justify-between mb-4">
@@ -405,7 +405,7 @@
             
             <div>
               <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
-                <span class="p-2 bg-[#033958]/10 rounded-lg">🕐</span> TIME
+                <span class="p-2 bg-[#033958]/10 rounded-lg">🕐</span> {{ t('TIME') }}
               </h4>
               
               <div class="flex items-center justify-center gap-4 mb-6">
@@ -460,14 +460,14 @@
                   @click.stop="setPeriod('AM')"
                   :class="['flex-1 px-4 py-6 text-base font-bold rounded-xl transition-all', selectedPeriod === 'AM' ? 'bg-[#033958] text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-gray-200']"
                 >
-                  AM
+                  {{ t('AM') }}
                 </button>
                 <button 
                   type="button" 
                   @click.stop="setPeriod('PM')"
                   :class="['flex-1 px-4 py-6 text-base font-bold rounded-xl transition-all', selectedPeriod === 'PM' ? 'bg-[#033958] text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-gray-200']"
                 >
-                  PM
+                  {{ t('PM') }}
                 </button>
               </div>
             </div>
@@ -479,7 +479,7 @@
               @click.stop="setDTNow"
               class="px-5 py-2.5 text-sm text-[#033958] hover:text-white hover:bg-[#033958] font-bold rounded-xl transition-all border-2 border-[#033958]"
             >
-              Now
+              {{ t('Now') }}
             </button>
             <div class="flex gap-3">
               <button 
@@ -487,14 +487,14 @@
                 @click.stop="clearDTValue"
                 class="px-5 py-2.5 text-sm text-gray-600 font-semibold hover:bg-gray-100 rounded-xl transition-all"
               >
-                Clear
+                {{ t('Clear') }}
               </button>
               <button 
                 type="button" 
                 @click.stop="confirmDTValue"
                 class="px-6 py-2.5 text-sm text-white bg-[#033958] hover:bg-[#022f42] rounded-xl font-bold shadow-lg transition-all"
               >
-                Confirm
+                {{ t('Confirm') }}
               </button>
             </div>
           </div>
@@ -505,6 +505,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, computed, useId, watch } from 'vue'
 
 defineOptions({

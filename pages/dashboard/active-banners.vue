@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive, computed } from 'vue'
 import { useActiveBanner } from '@/composables/modules/active-banner/useActiveBanner'
 import { useFetchPrograms } from '@/composables/modules/programs/useFetchPrograms'
@@ -106,9 +108,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Promotional Banners</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Promotional Banners') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Schedule and manage banners for the home page.
+          {{ t('Schedule and manage banners for the home page.') }}
         </p>
       </div>
       <button 
@@ -118,7 +120,7 @@ definePageMeta({
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        <span>Add Banner</span>
+        <span>{{ t('Add Banner') }}</span>
       </button>
     </div>
 
@@ -141,11 +143,11 @@ definePageMeta({
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Program</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Start Date</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">End Date</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Status</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Program') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Start Date') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('End Date') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Status') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
@@ -219,8 +221,8 @@ definePageMeta({
 
         <div class="flex items-center justify-between p-4 bg-gray-50 border border-gray-100 rounded-lg">
           <div>
-            <p class="text-sm font-bold text-gray-900">Active Status</p>
-            <p class="text-xs text-gray-500">Should this banner be visible?</p>
+            <p class="text-sm font-bold text-gray-900">{{ t('Active Status') }}</p>
+            <p class="text-xs text-gray-500">{{ t('Should this banner be visible?') }}</p>
           </div>
           <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" v-model="form.isActive" class="sr-only peer" />
@@ -231,7 +233,7 @@ definePageMeta({
 
       <template #actions>
         <div class="flex items-center justify-end gap-3 w-full border-t border-gray-100 p-4">
-          <button @click="showModal = false" class="px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-900">Cancel</button>
+          <button @click="showModal = false" class="px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-900">{{ t('Cancel') }}</button>
           <button 
             @click="handleSubmit" 
             :disabled="loading || !form.programId" 

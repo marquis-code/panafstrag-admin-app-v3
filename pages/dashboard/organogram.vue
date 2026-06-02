@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive } from 'vue'
 import { useFetchOrganogram } from '@/composables/modules/organogram/useFetchOrganogram'
 import { useCreateOrganogramNode } from '@/composables/modules/organogram/useCreateOrganogramNode'
@@ -84,9 +86,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Organogram</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Organogram') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Manage the organizational levels and reporting structure.
+          {{ t('Manage the organizational levels and reporting structure.') }}
         </p>
       </div>
       <button 
@@ -96,7 +98,7 @@ definePageMeta({
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        <span>Add Node</span>
+        <span>{{ t('Add Node') }}</span>
       </button>
     </div>
 
@@ -118,10 +120,10 @@ definePageMeta({
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Name</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Level</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Order</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Name') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Level') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Order') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
@@ -181,7 +183,7 @@ definePageMeta({
       <template #actions>
         <div class="flex items-center justify-end gap-3 w-full border-t border-gray-100 p-4">
           <button @click="showModal = false" class="px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-900">
-            Cancel
+            {{ t('Cancel') }}
           </button>
           <button 
             @click="handleSubmit" 

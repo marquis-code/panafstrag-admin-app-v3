@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive } from 'vue'
 import { useFetchObjectives } from '@/composables/modules/objective/useFetchObjectives'
 import { useCreateObjective } from '@/composables/modules/objective/useCreateObjective'
@@ -75,9 +77,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Objectives</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Objectives') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Manage the main goals and missions.
+          {{ t('Manage the main goals and missions.') }}
         </p>
       </div>
       <button 
@@ -87,7 +89,7 @@ definePageMeta({
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        Add Objective
+        {{ t('Add Objective') }}
       </button>
     </div>
 
@@ -111,8 +113,8 @@ definePageMeta({
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
               <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 w-16 text-center">#</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Description</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Description') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -161,7 +163,7 @@ definePageMeta({
       <div class="space-y-8 py-8 px-6">
         <section class="space-y-6">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Details</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Details') }}</h3>
           </div>
           <div class="bg-white rounded-lg p-1 border border-gray-200 ">
             <AnimatedInput 
@@ -177,7 +179,7 @@ definePageMeta({
 
       <template #actions>
         <div class="flex items-center justify-end gap-4 w-full px-8 pb-8">
-          <button @click="showModal = false" class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900">Cancel</button>
+          <button @click="showModal = false" class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900">{{ t('Cancel') }}</button>
           <button 
             type="button" 
             @click="handleSubmit" 

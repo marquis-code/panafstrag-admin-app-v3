@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive, onMounted } from 'vue'
 import { useFetchLanguageGroups } from '@/composables/modules/languageGroups/useFetchLanguageGroups'
 import { useCreateLanguageGroup } from '@/composables/modules/languageGroups/useCreateLanguageGroup'
@@ -82,9 +84,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Language Groups</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Language Groups') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Manage and categorize regional language groups for community engagement.
+          {{ t('Manage and categorize regional language groups for community engagement.') }}
         </p>
       </div>
       <button 
@@ -94,7 +96,7 @@ definePageMeta({
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        Create Group
+        {{ t('Create Group') }}
       </button>
     </div>
 
@@ -117,9 +119,9 @@ definePageMeta({
         <table class="w-full text-left border-collapse min-w-[800px]">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Group Name</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Description</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Group Name') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Description') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -128,7 +130,7 @@ definePageMeta({
                 <div class="flex items-center gap-4">
                   <div class="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden border border-gray-200 flex-shrink-0">
                     <img v-if="group.imageUrl" :src="group.imageUrl" class="w-full h-full object-cover" />
-                    <div v-else class="w-full h-full flex items-center justify-center text-[10px] font-bold text-gray-400">LNG</div>
+                    <div v-else class="w-full h-full flex items-center justify-center text-[10px] font-bold text-gray-400">{{ t('LNG') }}</div>
                   </div>
                   <div>
                     <p class="font-bold text-gray-900 text-sm">{{ group.name }}</p>
@@ -140,7 +142,7 @@ definePageMeta({
                 <div class="max-w-md space-y-2">
                   <p class="text-sm text-gray-500 line-clamp-2">{{ group.description || 'No description provided.' }}</p>
                   <a v-if="group.url" :href="group.url" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 text-xs font-bold">
-                    View Website
+                    {{ t('View Website') }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -179,7 +181,7 @@ definePageMeta({
         <!-- Section 1: Basic Info -->
         <section class="space-y-6">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Basic Information</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Basic Information') }}</h3>
           </div>
           
           <div class="grid lg:grid-cols-2 gap-8">
@@ -196,7 +198,7 @@ definePageMeta({
               />
             </div>
             <div class="space-y-2 text-center">
-              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider">Cover Image</label>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider">{{ t('Cover Image') }}</label>
               <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <MediaUpload v-model="form.imageUrl" folder="language-groups" />
               </div>
@@ -207,7 +209,7 @@ definePageMeta({
         <!-- Section 2: Description -->
         <section class="space-y-6">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Description</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Description') }}</h3>
           </div>
           <div class="bg-white border border-gray-200 rounded-lg p-1 ">
             <AnimatedInput 
@@ -223,7 +225,7 @@ definePageMeta({
 
       <template #actions>
         <div class="flex items-center justify-end gap-4 w-full px-8 pb-8">
-          <button @click="showModal = false" class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900">Cancel</button>
+          <button @click="showModal = false" class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900">{{ t('Cancel') }}</button>
           <button 
             type="button" 
             @click="handleSubmit" 

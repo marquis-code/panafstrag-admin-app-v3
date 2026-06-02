@@ -44,7 +44,7 @@
                 :disabled="loading"
                 class="w-full py-3 bg-white border border-gray-300 text-gray-700 text-sm font-bold rounded-lg hover:bg-gray-50 transition-colors"
               >
-                Cancel
+                {{ t('Cancel') }}
               </button>
             </div>
           </div>
@@ -55,6 +55,8 @@
 </template>
 
 <script setup>
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 defineProps({
   show: Boolean,
   title: String,

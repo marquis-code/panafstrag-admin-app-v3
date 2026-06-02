@@ -8,21 +8,21 @@
 
     <div class="container mx-auto px-4 text-center">
       <div class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest uppercase bg-indigo-100 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-full">
-        Welcome to Panafstrag
+        {{ t('Welcome to Panafstrag') }}
       </div>
       <h1 class="text-5xl lg:text-7xl font-black mb-8 leading-tight tracking-tight text-gray-900 dark:text-white">
-        Panafricana Strategic & <br />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Policy Research Group</span>
+        {{ t('Panafricana Strategic &') }} <br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">{{ t('Policy Research Group') }}</span>
       </h1>
       <p class="text-xl text-slate-600 dark:text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-        We provide deep strategic insights and policy recommendations to foster sustainable development across the African continent through rigorous research and collaborative action.
+        {{ t('We provide deep strategic insights and policy recommendations to foster sustainable development across the African continent through rigorous research and collaborative action.') }}
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <NuxtLink to="/programs" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-xl shadow-indigo-200 dark:shadow-indigo-950/40 transition-all hover:-translate-y-1 active:scale-95">
-          Explore Programs
+          {{ t('Explore Programs') }}
         </NuxtLink>
         <NuxtLink to="/about" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white font-bold rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all hover:-translate-y-1 active:scale-95">
-          Learn More
+          {{ t('Learn More') }}
         </NuxtLink>
       </div>
     </div>

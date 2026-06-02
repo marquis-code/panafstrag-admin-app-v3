@@ -13,8 +13,8 @@
              <Logo class="h-5 w-auto brightness-0 invert" />
           </div>
           <div class="flex flex-col">
-            <span class="text-sm font-bold text-gray-900 leading-none">PANAFSTRAG</span>
-            <span class="text-[10px] font-medium text-gray-400 mt-1">Admin Panel</span>
+            <span class="text-sm font-bold text-gray-900 leading-none">{{ t('PANAFSTRAG') }}</span>
+            <span class="text-[10px] font-medium text-gray-400 mt-1">{{ t('Admin Panel') }}</span>
           </div>
         </div>
         <button @click="isSidebarOpen = false" class="lg:hidden p-2 text-gray-400 hover:bg-gray-50 rounded-lg">
@@ -42,7 +42,7 @@
       <!-- Footer Info -->
       <div class="mt-auto p-6 border-t border-gray-100">
         <p class="text-[11px] font-medium text-gray-400">
-          Admin Dashboard v2.4.1
+          {{ t('Admin Dashboard v2.4.1') }}
         </p>
       </div>
     </aside>
@@ -68,11 +68,11 @@
           <div class="flex items-center gap-4">
             <div>
               <h2 class="text-lg font-bold text-gray-900">{{ currentRouteName }}</h2>
-              <p class="text-xs text-gray-500 font-medium">Manage your platform content and settings</p>
+              <p class="text-xs text-gray-500 font-medium">{{ t('Manage your platform content and settings') }}</p>
             </div>
             <div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-100">
                <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-               <span class="text-[10px] font-bold uppercase tracking-wider">Online</span>
+               <span class="text-[10px] font-bold uppercase tracking-wider">{{ t('Online') }}</span>
             </div>
           </div>
         </div>
@@ -85,8 +85,8 @@
               class="flex items-center gap-3 p-1.5 pl-3 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all"
             >
               <div class="hidden sm:flex flex-col items-end">
-                <span class="text-sm font-bold text-gray-900">{{ user?.firstName || 'Admin' }}</span>
-                <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Administrator</span>
+                <span class="text-sm font-bold text-gray-900">{{ user?.firstName || t('Admin') }}</span>
+                <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">{{ t('Administrator') }}</span>
               </div>
               <div class="h-9 w-9 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-700 font-bold text-sm">
                 {{ userInitials }}
@@ -106,7 +106,7 @@
             >
               <div v-if="isProfileOpen" class="absolute right-0 mt-3 w-64 bg-white border border-gray-200 shadow-xl rounded-xl py-2 z-50">
                 <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Signed in as</p>
+                  <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">{{ t('Signed in as') }}</p>
                   <p class="text-sm font-bold text-gray-900 truncate">{{ user?.email }}</p>
                 </div>
                 
@@ -115,13 +115,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    My Account
+                    {{ t('My Account') }}
                   </NuxtLink>
                   <button @click="triggerLogout" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
-                    Logout
+                    {{ t('Logout') }}
                   </button>
                 </div>
               </div>
@@ -146,20 +146,22 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
            </svg>
         </div>
-        <h3 class="text-lg font-bold text-gray-900 mb-2">Are you sure you want to logout?</h3>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ t('Are you sure you want to logout?') }}</h3>
         <p class="text-sm text-gray-500">
-          Your current session will be closed.
+          {{ t('Your current session will be closed.') }}
         </p>
       </div>
       <template #actions>
-        <button @click="showLogoutModal = false" class="px-5 py-2.5 text-sm font-bold text-gray-500 hover:text-gray-900">Cancel</button>
-        <button @click="handleLogout" class="px-6 py-2.5 bg-red-600 text-white text-sm font-bold rounded-lg hover:bg-red-700 transition-all">Logout</button>
+        <button @click="showLogoutModal = false" class="px-5 py-2.5 text-sm font-bold text-gray-500 hover:text-gray-900">{{ t('Cancel') }}</button>
+        <button @click="handleLogout" class="px-6 py-2.5 bg-red-600 text-white text-sm font-bold rounded-lg hover:bg-red-700 transition-all">{{ t('Logout') }}</button>
       </template>
     </Modal>
   </div>
 </template>
 
 <script setup>
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { useUser } from "@/composables/modules/auth/user";
 import { markRaw, defineComponent, h, ref, computed } from 'vue'
 
@@ -193,13 +195,13 @@ const handleLogout = () => {
 }
 
 const currentRouteName = computed(() => {
-  const activeItem = navItems.find(item => isRouteActive(item.path))
+  const activeItem = navItems.value.find(item => isRouteActive(item.path))
   return activeItem ? activeItem.label : 'Dashboard'
 })
 
-const navItems = [
+const navItems = computed(() => [
   { 
-    label: 'Dashboard', 
+    label: t('Dashboard'), 
     path: '/', 
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -208,7 +210,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Home Content', 
+    label: t('Home Content'), 
     path: '/home-content',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -217,7 +219,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Board Members', 
+    label: t('Board Members'), 
     path: '/board',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -226,7 +228,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Research Cells', 
+    label: t('Research Cells'), 
     path: '/cells',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -235,7 +237,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Programs', 
+    label: t('Programs'), 
     path: '/programs',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -244,7 +246,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Banners', 
+    label: t('Banners'), 
     path: '/active-banners',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -253,7 +255,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Archives', 
+    label: t('Archives'), 
     path: '/archives',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -262,7 +264,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Objectives', 
+    label: t('Objectives'), 
     path: '/objectives',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -271,7 +273,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Responsibilities', 
+    label: t('Responsibilities'), 
     path: '/responsibilities',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -280,7 +282,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Organogram', 
+    label: t('Organogram'), 
     path: '/organogram',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -290,7 +292,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Focus Areas', 
+    label: t('Focus Areas'), 
     path: '/focus-areas',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -299,7 +301,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Language Groups', 
+    label: t('Language Groups'), 
     path: '/language-groups',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -308,7 +310,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Enquiries', 
+    label: t('Enquiries'), 
     path: '/enquiries',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -317,7 +319,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Chat', 
+    label: t('Chat'), 
     path: '/chat',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -326,7 +328,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Bot Settings', 
+    label: t('Bot Settings'), 
     path: '/bot-config',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -335,7 +337,7 @@ const navItems = [
     }))
   },
   { 
-    label: 'Activity Log', 
+    label: t('Activity Log'), 
     path: '/audit-trail',
     icon: markRaw(defineComponent({
       render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-full h-full', 'stroke-width': '2' }, [
@@ -343,7 +345,7 @@ const navItems = [
       ])
     }))
   }
-]
+])
 </script>
 
 <style>

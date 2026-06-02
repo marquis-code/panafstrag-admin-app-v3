@@ -3,9 +3,9 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Activity Log</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Activity Log') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Track website activity, page visits, and user interactions.
+          {{ t('Track website activity, page visits, and user interactions.') }}
         </p>
       </div>
       <button 
@@ -132,6 +132,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, onMounted, computed, markRaw } from 'vue'
 import { useCookie } from '#app'
 

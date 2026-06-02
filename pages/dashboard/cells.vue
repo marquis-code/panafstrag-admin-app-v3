@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive } from 'vue'
 import { useFetchCells } from '@/composables/modules/cells/useFetchCells'
 import { useCreateCell } from '@/composables/modules/cells/useCreateCell'
@@ -84,9 +86,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Research Cells & Hubs</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Research Cells & Hubs') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Manage research hubs, their locations, and lead investigators.
+          {{ t('Manage research hubs, their locations, and lead investigators.') }}
         </p>
       </div>
       <button 
@@ -96,7 +98,7 @@ definePageMeta({
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        Add New Hub
+        {{ t('Add New Hub') }}
       </button>
     </div>
 
@@ -119,10 +121,10 @@ definePageMeta({
         <table class="w-full text-left border-collapse min-w-[900px]">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Hub Name</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Location</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Lead Person</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Hub Name') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Location') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Lead Person') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -131,7 +133,7 @@ definePageMeta({
                 <div class="flex items-center gap-4">
                   <div class="w-16 h-10 rounded-lg bg-gray-100 overflow-hidden border border-gray-200 flex-shrink-0">
                     <img v-if="cell.imageUrl" :src="cell.imageUrl" class="w-full h-full object-cover" />
-                    <div v-else class="w-full h-full flex items-center justify-center text-[10px] font-bold text-gray-400">HUB</div>
+                    <div v-else class="w-full h-full flex items-center justify-center text-[10px] font-bold text-gray-400">{{ t('HUB') }}</div>
                   </div>
                   <p class="text-sm font-bold text-gray-900">{{ cell.name }}</p>
                 </div>
@@ -152,7 +154,7 @@ definePageMeta({
                   </div>
                   <div>
                     <p class="text-sm font-bold text-gray-900">{{ cell.leadName }}</p>
-                    <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Lead Investigator</p>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">{{ t('Lead Investigator') }}</p>
                   </div>
                 </div>
               </td>
@@ -182,7 +184,7 @@ definePageMeta({
         <!-- Hub Basic Info -->
         <section class="space-y-6">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Hub Details</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Hub Details') }}</h3>
           </div>
           
           <div class="grid md:grid-cols-2 gap-8 items-start">
@@ -204,7 +206,7 @@ definePageMeta({
               />
             </div>
             <div class="space-y-2 text-center">
-              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider">Hub Image</label>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider">{{ t('Hub Image') }}</label>
               <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <MediaUpload v-model="form.imageUrl" folder="cells" />
               </div>
@@ -215,7 +217,7 @@ definePageMeta({
         <!-- Mandate / Description -->
         <section class="space-y-6 pb-4">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Description</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Description') }}</h3>
           </div>
           <div class="bg-white rounded-lg p-1 border border-gray-200 ">
              <RichTextEditor v-model="form.description" />
@@ -225,7 +227,7 @@ definePageMeta({
 
       <template #actions>
         <div class="flex items-center justify-end gap-4 w-full px-8 pb-8">
-          <button @click="showModal = false" class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900">Cancel</button>
+          <button @click="showModal = false" class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900">{{ t('Cancel') }}</button>
           <button 
             @click="handleSubmit" 
             :disabled="loading" 

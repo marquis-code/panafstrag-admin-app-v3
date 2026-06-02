@@ -154,7 +154,7 @@
                   @click="clear"
                   class="px-3 py-2 text-xs font-bold text-gray-400 hover:text-gray-600"
                 >
-                  Clear
+                  {{ t('Clear') }}
                 </button>
                 <button 
                   v-if="type === 'time'"
@@ -162,7 +162,7 @@
                   @click="confirmTime"
                   class="px-5 py-2 text-xs font-bold bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
                 >
-                  Confirm
+                  {{ t('Confirm') }}
                 </button>
               </div>
             </div>
@@ -174,6 +174,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, computed, onMounted } from 'vue'
 
 interface Props {

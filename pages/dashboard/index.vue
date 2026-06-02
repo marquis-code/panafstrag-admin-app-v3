@@ -3,9 +3,9 @@
     <!-- Header -->
     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dashboard</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Dashboard') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Summary of website activity and content.
+          {{ t('Summary of website activity and content.') }}
         </p>
       </div>
       <div class="flex items-center gap-4 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg">
@@ -49,9 +49,9 @@
       <!-- Quick Actions -->
       <div class="lg:col-span-2 bg-white p-6 rounded-lg border border-gray-200 space-y-6">
         <div>
-          <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Quick Actions</h3>
+          <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">{{ t('Quick Actions') }}</h3>
           <p class="text-gray-500 text-xs mt-1 font-medium">
-            Quickly access common management features.
+            {{ t('Quickly access common management features.') }}
           </p>
         </div>
         
@@ -77,10 +77,10 @@
       <!-- System Status -->
       <div class="bg-white p-6 rounded-lg border border-gray-200 space-y-6">
         <div class="flex items-center justify-between">
-          <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">System Status</h3>
+          <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">{{ t('System Status') }}</h3>
           <div class="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-100">
             <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-            <span class="text-[9px] font-bold uppercase tracking-wider">Active</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider">{{ t('Active') }}</span>
           </div>
         </div>
 
@@ -104,7 +104,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Last updated: 2 mins ago</p>
+          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{ t('Last updated: 2 mins ago') }}</p>
         </div>
       </div>
     </div>
@@ -112,6 +112,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { useFetchStats } from '@/composables/modules/admin/useFetchStats'
 const { fetchStats, stats, loading: pending } = useFetchStats()
 

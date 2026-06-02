@@ -15,13 +15,13 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-7-3l-3-3m0 0l-3 3m3-3v12" />
           </svg>
         </div>
-        <p class="text-[9px] font-black text-gray-400 uppercase tracking-[0.3em]">Drop Media or Click</p>
-        <input type="file" @change="handleFileSelect" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" />
+        <p class="text-[9px] font-black text-gray-400 uppercase tracking-[0.3em]">{{ t('Drop Media or Click') }}</p>
+        <input type="file" @change="handleFileSelect" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" :multiple="multiple" />
       </div>
 
       <div v-if="loading" class="relative z-10 flex flex-col items-center">
         <div class="w-8 h-8 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-        <p class="text-[8px] font-black text-black mt-4 uppercase tracking-[0.4em]">Uploading</p>
+        <p class="text-[8px] font-black text-black mt-4 uppercase tracking-[0.4em]">{{ t('Uploading') }}</p>
       </div>
     </div>
     <div v-if="uploadError" class="text-[9px] font-black text-black uppercase tracking-widest">{{ uploadError }}</div>
@@ -29,12 +29,15 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, watch } from 'vue'
 import { useUploadFile } from '@/composables/media/useUploadFile'
 
 const props = defineProps<{
   modelValue?: string,
-  folder?: string
+  folder?: string,
+  multiple?: boolean
 }>()
 const emit = defineEmits(['update:modelValue'])
 
@@ -54,14 +57,20 @@ const handleUpload = async (file: File) => {
   }
 }
 
-const handleFileSelect = (e: Event) => {
-  const file = (e.target as HTMLInputElement).files?.[0]
-  if (file) handleUpload(file)
+const handleFileSelect = async (e: Event) => {
+  const files = (e.target as HTMLInputElement).files
+  if (!files) return
+  for (let i = 0; i < files.length; i++) {
+    await handleUpload(files[i])
+  }
 }
 
-const handleDrop = (e: DragEvent) => {
+const handleDrop = async (e: DragEvent) => {
   isDragging.value = false
-  const file = e.dataTransfer?.files?.[0]
-  if (file) handleUpload(file)
+  const files = e.dataTransfer?.files
+  if (!files) return
+  for (let i = 0; i < files.length; i++) {
+    await handleUpload(files[i])
+  }
 }
 </script>

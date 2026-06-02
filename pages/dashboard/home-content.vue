@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive, watch } from 'vue'
 import { useHomeContent } from '@/composables/modules/home-content/useHomeContent'
 import { useCustomToast } from "@/composables/core/useCustomToast"
@@ -173,7 +175,7 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Home Page Content</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Home Page Content') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
           Manage the text, images, and links displayed on the website's home page.
         </p>
@@ -200,7 +202,7 @@ definePageMeta({
       <!-- About Us Section -->
       <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
-          <h3 class="text-sm font-bold text-gray-700">About Us Section</h3>
+          <h3 class="text-sm font-bold text-gray-700">{{ t('About Us Section') }}</h3>
         </div>
         <div class="p-6 space-y-6">
           <div class="grid md:grid-cols-2 gap-6">
@@ -211,7 +213,7 @@ definePageMeta({
           
           <div class="grid md:grid-cols-2 gap-8 pt-6 border-t border-gray-100">
             <div class="space-y-4">
-              <label class="block text-xs font-bold text-gray-500">Section Image</label>
+              <label class="block text-xs font-bold text-gray-500">{{ t('Section Image') }}</label>
               <MediaUpload v-model="form.aboutUsContextImage" folder="home" />
             </div>
             <AnimatedInput v-model="form.aboutUsContextText" label="Supporting Text" type="textarea" :rows="4" />
@@ -222,7 +224,7 @@ definePageMeta({
       <!-- Section Titles -->
       <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
-          <h3 class="text-sm font-bold text-gray-700">Page Section Titles</h3>
+          <h3 class="text-sm font-bold text-gray-700">{{ t('Page Section Titles') }}</h3>
         </div>
         
         <div class="p-6 space-y-10">
@@ -256,7 +258,7 @@ definePageMeta({
       <!-- Page Headers and Descriptions -->
       <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
-          <h3 class="text-sm font-bold text-gray-700">Page Headers & Descriptions</h3>
+          <h3 class="text-sm font-bold text-gray-700">{{ t('Page Headers & Descriptions') }}</h3>
         </div>
         
         <div class="p-6 space-y-6 divide-y divide-gray-100">
@@ -305,7 +307,7 @@ definePageMeta({
       <!-- Contact Information -->
       <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
-          <h3 class="text-sm font-bold text-gray-700">Contact Information</h3>
+          <h3 class="text-sm font-bold text-gray-700">{{ t('Contact Information') }}</h3>
         </div>
         
         <div class="p-6 space-y-10">
@@ -313,12 +315,12 @@ definePageMeta({
             <!-- Emails -->
             <div class="space-y-4">
               <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-                <label class="text-xs font-bold text-gray-500">Email Addresses</label>
+                <label class="text-xs font-bold text-gray-500">{{ t('Email Addresses') }}</label>
                 <button @click="addContactEmail" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
-                  Add Email
+                  {{ t('Add Email') }}
                 </button>
               </div>
               <div class="space-y-3">
@@ -338,12 +340,12 @@ definePageMeta({
             <!-- Phones -->
             <div class="space-y-4">
               <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-                <label class="text-xs font-bold text-gray-500">Phone Numbers</label>
+                <label class="text-xs font-bold text-gray-500">{{ t('Phone Numbers') }}</label>
                 <button @click="addContactPhone" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
-                  Add Phone
+                  {{ t('Add Phone') }}
                 </button>
               </div>
               <div class="space-y-3">
@@ -366,12 +368,12 @@ definePageMeta({
           <!-- Social Links -->
           <div class="pt-6 border-t border-gray-100 space-y-6">
             <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold text-gray-500 uppercase">Social Media Links</h4>
+              <h4 class="text-xs font-bold text-gray-500 uppercase">{{ t('Social Media Links') }}</h4>
               <button @click="addSocialLink" class="px-4 py-2 bg-gray-100 text-gray-700 text-xs font-bold rounded-lg hover:bg-gray-200 transition-all border border-gray-200 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Social Link
+                {{ t('Add Social Link') }}
               </button>
             </div>
             
@@ -395,7 +397,7 @@ definePageMeta({
       <!-- Website General Content -->
       <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
-          <h3 class="text-sm font-bold text-gray-700">Website General Content</h3>
+          <h3 class="text-sm font-bold text-gray-700">{{ t('Website General Content') }}</h3>
         </div>
         <div class="p-6 space-y-8">
           <div class="grid md:grid-cols-2 gap-6">
@@ -404,7 +406,7 @@ definePageMeta({
           </div>
           
           <div class="pt-6 border-t border-gray-100 space-y-6">
-            <h4 class="text-xs font-bold text-gray-500 uppercase">Language Groups Text</h4>
+            <h4 class="text-xs font-bold text-gray-500 uppercase">{{ t('Language Groups Text') }}</h4>
             <div class="grid md:grid-cols-2 gap-8">
               <div class="space-y-4">
                 <AnimatedInput v-model="form.languageGroupFunctionTitle" label="Function Title" />
@@ -432,12 +434,12 @@ definePageMeta({
         <!-- Main Navigation -->
         <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col">
           <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-            <h3 class="text-sm font-bold text-gray-700">Main Navigation</h3>
+            <h3 class="text-sm font-bold text-gray-700">{{ t('Main Navigation') }}</h3>
             <button @click="addPrimaryNavItem" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              Add Link
+              {{ t('Add Link') }}
             </button>
           </div>
           
@@ -459,12 +461,12 @@ definePageMeta({
         <!-- Institute Sub-links -->
         <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col">
           <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-            <h3 class="text-sm font-bold text-gray-700">Institute Sub-links</h3>
+            <h3 class="text-sm font-bold text-gray-700">{{ t('Institute Sub-links') }}</h3>
             <button @click="addInstituteNavItem" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              Add Sub-link
+              {{ t('Add Sub-link') }}
             </button>
           </div>
 
@@ -487,18 +489,18 @@ definePageMeta({
       <!-- Home Page Slides -->
       <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-          <h3 class="text-sm font-bold text-gray-700">Home Page Slides</h3>
+          <h3 class="text-sm font-bold text-gray-700">{{ t('Home Page Slides') }}</h3>
           <button @click="addCarouselItem" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            Add Slide
+            {{ t('Add Slide') }}
           </button>
         </div>
 
         <div class="p-6 space-y-6">
           <div v-if="!form.carousels.length" class="py-12 bg-gray-50 border-2 border-dashed border-gray-100 rounded-lg text-center">
-            <p class="text-sm font-medium text-gray-400">No slides added yet.</p>
+            <p class="text-sm font-medium text-gray-400">{{ t('No slides added yet.') }}</p>
           </div>
 
           <div class="space-y-6">
@@ -516,7 +518,7 @@ definePageMeta({
                   <AnimatedInput v-model="slide.description" label="Slide Description" type="textarea" :rows="3" />
                 </div>
                 <div class="space-y-4">
-                  <label class="block text-xs font-bold text-gray-500">Slide Image</label>
+                  <label class="block text-xs font-bold text-gray-500">{{ t('Slide Image') }}</label>
                   <MediaUpload v-model="slide.imgUrl" folder="hero" />
                 </div>
               </div>

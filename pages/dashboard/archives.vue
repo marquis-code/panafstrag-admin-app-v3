@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, reactive } from 'vue'
 import { useFetchArchives } from '@/composables/modules/archives/useFetchArchives'
 import { useCreateArchive } from '@/composables/modules/archives/useCreateArchive'
@@ -168,9 +170,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Archives</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Archives') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Manage documents, reports, and past program records.
+          {{ t('Manage documents, reports, and past program records.') }}
         </p>
       </div>
       <button 
@@ -180,7 +182,7 @@ definePageMeta({
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
         </svg>
-        Add Item
+        {{ t('Add Item') }}
       </button>
     </div>
 
@@ -204,10 +206,10 @@ definePageMeta({
           <table class="w-full text-left border-collapse min-w-[1000px]">
             <thead>
               <tr class="bg-gray-50 border-b border-gray-200">
-                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Title</th>
-                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Category</th>
-                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-center">Date</th>
-                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Title') }}</th>
+                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Category') }}</th>
+                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-center">{{ t('Date') }}</th>
+                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
@@ -282,7 +284,7 @@ definePageMeta({
         <!-- Basic Info -->
         <section class="space-y-8">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Basic Info</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Basic Info') }}</h3>
           </div>
           <div class="grid grid-cols-1 gap-6">
             <div class="bg-white rounded-lg p-1 border border-gray-200 ">
@@ -323,7 +325,7 @@ definePageMeta({
               </div>
             </div>
             <div class="max-w-xs bg-white rounded-lg p-4 border border-gray-200 ">
-              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Specific Date</label>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">{{ t('Specific Date') }}</label>
               <CustomDatePicker v-model="form.date" label="Date" />
             </div>
           </div>
@@ -332,7 +334,7 @@ definePageMeta({
         <!-- Program Specific Details -->
           <section class="space-y-8">
             <div class="border-l-4 border-blue-600 pl-4">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Program Details</h3>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Program Details') }}</h3>
             </div>
             <div class="grid md:grid-cols-2 gap-8">
               <div class="space-y-6">
@@ -355,7 +357,7 @@ definePageMeta({
                 </div>
               </div>
               <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Banner Image</label>
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">{{ t('Banner Image') }}</label>
                 <div class="bg-white rounded-lg p-4 border border-gray-200 ">
                   <MediaUpload v-model="form.imageUrl" folder="programs" />
                 </div>
@@ -367,7 +369,7 @@ definePageMeta({
           <section class="space-y-6">
             <div class="flex items-center justify-between border-b border-gray-100 pb-4">
               <div class="border-l-4 border-blue-600 pl-4">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Image Gallery</h3>
+                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Image Gallery') }}</h3>
               </div>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -383,7 +385,7 @@ definePageMeta({
               </div>
               <div class="aspect-[16/9] border-2 border-dashed border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-white hover:border-blue-600/30 transition-all group cursor-pointer relative overflow-hidden">
                 <MediaUpload :model-value="''" @update:model-value="(v: string) => { if(v) form.bannerImages.push(v) }" folder="banners" />
-                <span class="text-[10px] font-bold text-gray-400 mt-2 group-hover:text-blue-600 transition-colors uppercase tracking-wider">Add Image</span>
+                <span class="text-[10px] font-bold text-gray-400 mt-2 group-hover:text-blue-600 transition-colors uppercase tracking-wider">{{ t('Add Image') }}</span>
               </div>
             </div>
           </section>
@@ -391,7 +393,7 @@ definePageMeta({
           <!-- Time & Location -->
           <section class="space-y-6">
             <div class="border-l-4 border-blue-600 pl-4">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Time & Location</h3>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Time & Location') }}</h3>
             </div>
             <div class="flex flex-col gap-6">
               <div class="bg-white rounded-lg p-1 border border-gray-200 ">
@@ -417,7 +419,7 @@ definePageMeta({
           <!-- Virtual Links -->
           <section class="space-y-6">
             <div class="border-l-4 border-blue-600 pl-4">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Virtual Links</h3>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Virtual Links') }}</h3>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
               <div class="bg-white rounded-lg p-1 border border-gray-200 ">
@@ -435,10 +437,10 @@ definePageMeta({
           <!-- Content Description -->
           <section class="space-y-6">
             <div class="border-l-4 border-blue-600 pl-4">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Description</h3>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Description') }}</h3>
             </div>
             <div class="space-y-4">
-              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Full Content</label>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">{{ t('Full Content') }}</label>
               <div class="bg-white rounded-lg p-2 border border-gray-200 ">
                 <RichTextEditor v-model="form.content" />
               </div>
@@ -449,7 +451,7 @@ definePageMeta({
           <section class="space-y-6">
             <div class="flex items-center justify-between border-b border-gray-100 pb-4">
               <div class="border-l-4 border-blue-600 pl-4">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Speakers & Leads</h3>
+                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Speakers & Leads') }}</h3>
               </div>
               <button 
                 type="button"
@@ -459,12 +461,12 @@ definePageMeta({
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Speaker
+                {{ t('Add Speaker') }}
               </button>
             </div>
             
             <div v-if="!form.speakers.length" class="py-12 text-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-              No speakers added yet.
+              {{ t('No speakers added yet.') }}
             </div>
 
             <div class="grid gap-6">
@@ -495,7 +497,7 @@ definePageMeta({
                     </div>
                   </div>
                   <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 ml-1">Photo</label>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 ml-1">{{ t('Photo') }}</label>
                     <div class="bg-white rounded-lg p-4 border border-gray-200">
                       <MediaUpload v-model="speaker.imageUrl" folder="speakers" />
                     </div>
@@ -509,7 +511,7 @@ definePageMeta({
           <section class="space-y-6">
             <div class="flex items-center justify-between border-b border-gray-100 pb-4">
               <div class="border-l-4 border-blue-600 pl-4">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Program Agenda</h3>
+                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Program Agenda') }}</h3>
               </div>
               <button 
                 type="button"
@@ -519,12 +521,12 @@ definePageMeta({
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Item
+                {{ t('Add Item') }}
               </button>
             </div>
 
             <div v-if="!form.agenda.length" class="py-12 text-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-              No agenda items added yet.
+              {{ t('No agenda items added yet.') }}
             </div>
 
             <div class="space-y-4">
@@ -557,10 +559,10 @@ definePageMeta({
           <!-- Documents -->
           <section class="space-y-6">
             <div class="border-l-4 border-blue-600 pl-4">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Documents</h3>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Documents') }}</h3>
             </div>
             <div class="space-y-6">
-              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Attached Documents (PDF, Excel, Word, PPT)</label>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">{{ t('Attached Documents (PDF, Excel, Word, PPT)') }}</label>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div v-for="(doc, index) in form.uploadedDocumentFiles" :key="index" class="group relative">
                   <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg flex items-center gap-4 hover:bg-white hover:border-blue-600/30 transition-all ">
@@ -571,7 +573,7 @@ definePageMeta({
                     </div>
                     <div class="flex-1 min-w-0">
                       <p class="text-xs font-bold text-gray-900 truncate">{{ doc?.split('/').pop()?.split('_').pop() || 'File' }}</p>
-                      <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Document</p>
+                      <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{{ t('Document') }}</p>
                     </div>
                     <button type="button" @click="form.uploadedDocumentFiles.splice(index, 1)" class="p-2 text-gray-300 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -582,7 +584,7 @@ definePageMeta({
                 </div>
                 <div class="border-2 border-dashed border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-white hover:border-blue-600/30 transition-all group relative overflow-hidden">
                   <DocumentUpload :model-value="''" @update:model-value="(v: string) => { if(v) form.uploadedDocumentFiles.push(v) }" folder="programs/documents" />
-                  <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-wider group-hover:text-blue-600 transition-colors">Upload Document</p>
+                  <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-wider group-hover:text-blue-600 transition-colors">{{ t('Upload Document') }}</p>
                 </div>
               </div>
             </div>
@@ -593,7 +595,7 @@ definePageMeta({
 
         <section class="space-y-8">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Summary</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Summary') }}</h3>
           </div>
           <div class="bg-white rounded-lg p-1 border border-gray-200 ">
              <AnimatedInput 
@@ -609,8 +611,8 @@ definePageMeta({
         <!-- Section Reordering -->
         <section class="space-y-6">
             <div class="border-l-4 border-blue-600 pl-4">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Page Section Order</h3>
-              <p class="text-[10px] text-gray-400 font-bold uppercase mt-1">Reorder how sections appear on the website</p>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Page Section Order') }}</h3>
+              <p class="text-[10px] text-gray-400 font-bold uppercase mt-1">{{ t('Reorder how sections appear on the website') }}</p>
             </div>
             
             <div class="space-y-3 max-w-lg">
@@ -649,11 +651,11 @@ definePageMeta({
 
         <section class="space-y-8 pb-4">
           <div class="border-l-4 border-blue-600 pl-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Files & Settings</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">{{ t('Files & Settings') }}</h3>
           </div>
           <div class="grid md:grid-cols-2 gap-8">
             <div>
-              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 ml-1">Resource File Upload</label>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 ml-1">{{ t('Resource File Upload') }}</label>
               <div v-if="form.fileUrl" class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-between">
                 <div class="flex items-center gap-3">
                   <div class="w-8 h-8 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
@@ -667,11 +669,11 @@ definePageMeta({
               </div>
               <div v-else class="border-2 border-dashed border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-white hover:border-blue-600/30 transition-all group relative overflow-hidden">
                 <DocumentUpload :model-value="''" @update:model-value="(v: string) => { if(v) form.fileUrl = v }" folder="archives/resources" />
-                <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-wider group-hover:text-blue-600 transition-colors">Upload Primary File</p>
+                <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-wider group-hover:text-blue-600 transition-colors">{{ t('Upload Primary File') }}</p>
               </div>
             </div>
             <div>
-              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 ml-1">Thumbnail</label>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 ml-1">{{ t('Thumbnail') }}</label>
               <div class="bg-white rounded-lg p-4 border border-gray-200 ">
                 <MediaUpload v-model="form.thumbnailUrl" folder="archives" />
               </div>
@@ -686,7 +688,7 @@ definePageMeta({
             @click="showModal = false" 
             class="px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900"
           >
-            Cancel
+            {{ t('Cancel') }}
           </button>
           <button 
             @click="handleSubmit" 

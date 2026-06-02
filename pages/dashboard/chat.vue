@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { useChat } from '@/composables/useChat'
 import { useUser } from '@/composables/modules/auth/user'
 
@@ -160,7 +162,7 @@ definePageMeta({
       <!-- Sidebar Header -->
       <div class="h-20 px-6 flex items-center justify-between border-b border-gray-100 bg-white">
         <div>
-          <h2 class="text-xl font-extrabold text-gray-900 tracking-tight">Active Chats</h2>
+          <h2 class="text-xl font-extrabold text-gray-900 tracking-tight">{{ t('Active Chats') }}</h2>
         </div>
         <div class="flex items-center gap-1.5">
           <button @click="fetchHistory" class="p-2 text-gray-400 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors" title="Refresh">
@@ -202,7 +204,7 @@ definePageMeta({
           <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
-          <p class="text-xs font-bold uppercase tracking-widest">No active chats</p>
+          <p class="text-xs font-bold uppercase tracking-widest">{{ t('No active chats') }}</p>
         </div>
         
         <button 
@@ -227,9 +229,9 @@ definePageMeta({
               <span class="text-[10px] text-gray-400">{{ formatTime(conv.lastMessage.createdAt) }}</span>
             </div>
             <p v-if="conv.participantEmail" class="text-[11px] text-gray-400 truncate">{{ conv.participantEmail }}</p>
-            <p v-else class="text-[11px] text-gray-400 italic truncate">Unknown User</p>
+            <p v-else class="text-[11px] text-gray-400 italic truncate">{{ t('Unknown User') }}</p>
             <div class="flex items-center gap-1.5 mt-1">
-              <span v-if="conv.lastMessage.isAdmin" class="text-[10px] font-bold text-blue-600">YOU:</span>
+              <span v-if="conv.lastMessage.isAdmin" class="text-[10px] font-bold text-blue-600">{{ t('YOU:') }}</span>
               <p class="text-xs text-gray-500 truncate">
                 {{ conv.lastMessage.type === 'image' ? 'Sent an image' : conv.lastMessage.content }}
               </p>
@@ -278,7 +280,7 @@ definePageMeta({
         <div ref="messageContainer" class="flex-1 overflow-y-auto px-6 lg:px-20 py-8 space-y-6 custom-scrollbar">
           <div class="flex justify-center mb-8">
             <span class="px-4 py-1.5 bg-gray-200/50 text-[10px] font-bold text-gray-500 uppercase tracking-wider rounded-full">
-              Message History
+              {{ t('Message History') }}
             </span>
           </div>
 

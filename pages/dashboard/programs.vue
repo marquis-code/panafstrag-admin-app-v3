@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { useCustomToast } from '@/composables/core/useCustomToast'
 import { useFetchPrograms } from '@/composables/modules/programs/useFetchPrograms'
 import { useCreateProgram } from '@/composables/modules/programs/useCreateProgram'
@@ -259,15 +261,15 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">programs</h1>
-        <p class="text-gray-500 mt-2 text-sm font-medium">manage programs and events.</p>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('programs') }}</h1>
+        <p class="text-gray-500 mt-2 text-sm font-medium">{{ t('manage programs and events.') }}</p>
       </div>
       <button 
         @click="openCreate" 
         class="px-6 py-3 bg-blue-600 text-white font-semibold text-sm rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2"
       >
         <Plus :size="18" />
-        new program
+        {{ t('new program') }}
       </button>
     </div>
 
@@ -309,11 +311,11 @@ definePageMeta({
         <table class="w-full text-left border-collapse min-w-[1000px]">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-xs font-bold text-gray-500">name</th>
-              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-center">status</th>
-              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-center">visibility</th>
-              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-center">date</th>
-              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-right">actions</th>
+              <th class="px-6 py-4 text-xs font-bold text-gray-500">{{ t('name') }}</th>
+              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-center">{{ t('status') }}</th>
+              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-center">{{ t('visibility') }}</th>
+              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-center">{{ t('date') }}</th>
+              <th class="px-6 py-4 text-xs font-bold text-gray-500 text-right">{{ t('actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -327,7 +329,7 @@ definePageMeta({
                 <div class="flex items-center gap-4">
                   <div class="w-16 h-10 rounded-lg bg-gray-100 overflow-hidden border border-gray-200 flex-shrink-0">
                     <img v-if="program.imageUrl" :src="program.imageUrl" class="w-full h-full object-cover" />
-                    <div v-else class="w-full h-full flex items-center justify-center text-[10px] font-bold text-gray-400">img</div>
+                    <div v-else class="w-full h-full flex items-center justify-center text-[10px] font-bold text-gray-400">{{ t('img') }}</div>
                   </div>
                   <div class="max-w-md">
                     <p class="text-sm font-bold text-gray-900 line-clamp-1">{{ program.title }}</p>
@@ -378,14 +380,14 @@ definePageMeta({
           :class="['flex-1 py-2 text-xs font-semibold rounded-lg transition-all',
             activeTab === 'edit' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700']"
         >
-          edit details
+          {{ t('edit details') }}
         </button>
         <button 
           @click="activeTab = 'preview'" 
           :class="['flex-1 py-2 text-xs font-semibold rounded-lg transition-all',
             activeTab === 'preview' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700']"
         >
-          preview
+          {{ t('preview') }}
         </button>
       </div>
 
@@ -396,8 +398,8 @@ definePageMeta({
           <div class="flex items-center gap-3">
             <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
             <div>
-              <h3 class="text-sm font-bold text-gray-900">section order</h3>
-              <p class="text-xs text-gray-500 mt-0.5">drag and drop to reorder sections on the program page</p>
+              <h3 class="text-sm font-bold text-gray-900">{{ t('section order') }}</h3>
+              <p class="text-xs text-gray-500 mt-0.5">{{ t('drag and drop to reorder sections on the program page') }}</p>
             </div>
           </div>
           
@@ -436,7 +438,7 @@ definePageMeta({
         <section class="space-y-8">
           <div class="flex items-center gap-3">
             <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-            <h3 class="text-sm font-bold text-gray-900">basic information</h3>
+            <h3 class="text-sm font-bold text-gray-900">{{ t('basic information') }}</h3>
           </div>
           
           <div class="grid lg:grid-cols-3 gap-10">
@@ -457,7 +459,7 @@ definePageMeta({
               </div>
             </div>
             <div class="space-y-3">
-              <label class="block text-xs font-semibold text-gray-500">Cover image</label>
+              <label class="block text-xs font-semibold text-gray-500">{{ t('Cover image') }}</label>
               <div class="aspect-[4/3] bg-gray-50 border border-gray-200 rounded-2xl p-2">
                 <MediaUpload v-model="form.imageUrl" folder="programs" class="h-full" />
               </div>
@@ -469,7 +471,7 @@ definePageMeta({
         <section class="space-y-8">
           <div class="flex items-center gap-3">
             <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-            <h3 class="text-sm font-bold text-gray-900">Time and location</h3>
+            <h3 class="text-sm font-bold text-gray-900">{{ t('Time and location') }}</h3>
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
              <div class="bg-gray-50 p-6 rounded-2xl space-y-6 border border-gray-100">
@@ -503,7 +505,7 @@ definePageMeta({
         <section class="space-y-8">
           <div class="flex items-center gap-3">
             <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-            <h3 class="text-sm font-bold text-gray-900">Links</h3>
+            <h3 class="text-sm font-bold text-gray-900">{{ t('Links') }}</h3>
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="p-6 bg-white border border-gray-200 rounded-2xl space-y-4">
@@ -528,16 +530,16 @@ definePageMeta({
         <section class="space-y-8">
           <div class="flex items-center gap-3">
             <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-            <h3 class="text-sm font-bold text-gray-900">Program description</h3>
+            <h3 class="text-sm font-bold text-gray-900">{{ t('Program description') }}</h3>
           </div>
           <div class="grid lg:grid-cols-3 gap-10">
             <div class="lg:col-span-1">
-              <p class="text-sm text-gray-500 leading-relaxed font-medium">provide a short summary and detailed description for this program.</p>
+              <p class="text-sm text-gray-500 leading-relaxed font-medium">{{ t('provide a short summary and detailed description for this program.') }}</p>
             </div>
             <div class="lg:col-span-2 space-y-8">
               <AnimatedInput v-model="form.description" label="Short summary" type="textarea" :rows="3" />
               <div class="space-y-3">
-                <label class="block text-xs font-semibold text-gray-500">Full description</label>
+                <label class="block text-xs font-semibold text-gray-500">{{ t('Full description') }}</label>
                 <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 focus-within:bg-white focus-within:border-blue-500 transition-all">
                   <RichTextEditor v-model="form.content" />
                 </div>
@@ -553,11 +555,11 @@ definePageMeta({
             <div class="flex items-center justify-between border-b border-gray-100 pb-6">
               <div class="flex items-center gap-3">
                 <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-                <h3 class="text-sm font-bold text-gray-900">speakers</h3>
+                <h3 class="text-sm font-bold text-gray-900">{{ t('speakers') }}</h3>
               </div>
               <button @click="addSpeaker" class="px-4 py-2 bg-gray-900 text-white text-xs font-semibold rounded-lg hover:bg-black flex items-center gap-2 transition-all">
                 <PlusCircle :size="16" />
-                add speaker
+                {{ t('add speaker') }}
               </button>
             </div>
             <div class="space-y-4 max-h-[600px] overflow-y-auto px-1 pr-3 custom-scrollbar">
@@ -600,11 +602,11 @@ definePageMeta({
             <div class="flex items-center justify-between border-b border-gray-100 pb-6">
               <div class="flex items-center gap-3">
                 <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-                <h3 class="text-sm font-bold text-gray-900">agenda</h3>
+                <h3 class="text-sm font-bold text-gray-900">{{ t('agenda') }}</h3>
               </div>
               <button @click="addAgendaItem" class="px-4 py-2 bg-gray-900 text-white text-xs font-semibold rounded-lg hover:bg-black flex items-center gap-2 transition-all">
                 <PlusCircle :size="16" />
-                add agenda item
+                {{ t('add agenda item') }}
               </button>
             </div>
             <div class="space-y-4 max-h-[600px] overflow-y-auto px-1 pr-3 custom-scrollbar">
@@ -633,7 +635,7 @@ definePageMeta({
            <section class="space-y-8">
               <div class="flex items-center gap-3 border-b border-gray-100 pb-6">
                 <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-                <h3 class="text-sm font-bold text-gray-900">program gallery</h3>
+                <h3 class="text-sm font-bold text-gray-900">{{ t('program gallery') }}</h3>
               </div>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div v-for="(img, idx) in form.bannerImages" :key="idx" class="relative group aspect-video rounded-2xl overflow-hidden border border-gray-100">
@@ -645,11 +647,11 @@ definePageMeta({
                    </div>
                 </div>
                 <div class="aspect-video border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center bg-gray-50 hover:bg-white hover:border-blue-400 transition-all cursor-pointer relative overflow-hidden p-6 text-center group">
-                   <MediaUpload :model-value="''" @update:model-value="(v: string) => { if(v) form.bannerImages.push(v) }" folder="banners" class="absolute inset-0 opacity-0 z-10 cursor-pointer" />
+                   <MediaUpload :multiple="true" :model-value="''" @update:model-value="(v: string) => { if(v) form.bannerImages.push(v) }" folder="banners" class="absolute inset-0 opacity-0 z-10 cursor-pointer" />
                    <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-gray-400 group-hover:text-blue-600 transition-all mb-2">
                       <Plus :size="24" />
                    </div>
-                   <p class="text-[10px] font-bold text-gray-400 group-hover:text-blue-600 transition-all">add image</p>
+                   <p class="text-[10px] font-bold text-gray-400 group-hover:text-blue-600 transition-all">{{ t('add image') }}</p>
                 </div>
               </div>
            </section>
@@ -658,7 +660,7 @@ definePageMeta({
            <section class="space-y-8">
               <div class="flex items-center gap-3 border-b border-gray-100 pb-6">
                 <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
-                <h3 class="text-sm font-bold text-gray-900">documents</h3>
+                <h3 class="text-sm font-bold text-gray-900">{{ t('documents') }}</h3>
               </div>
               <div class="grid gap-3">
                  <div v-for="(doc, dIdx) in form.uploadedDocumentFiles" :key="dIdx" class="p-4 bg-gray-50 border border-transparent rounded-2xl hover:bg-white hover:border-gray-200 transition-all group flex items-center justify-between">
@@ -668,7 +670,7 @@ definePageMeta({
                       </div>
                       <div>
                         <p class="text-xs font-bold text-gray-900 truncate max-w-[200px]">{{ doc.split('/').pop() }}</p>
-                        <p class="text-[9px] text-blue-600 font-bold mt-0.5">document verified</p>
+                        <p class="text-[9px] text-blue-600 font-bold mt-0.5">{{ t('document verified') }}</p>
                       </div>
                    </div>
                    <button @click="form.uploadedDocumentFiles.splice(dIdx, 1)" class="p-2 text-gray-300 hover:text-red-600 transition-colors">
@@ -680,7 +682,7 @@ definePageMeta({
                     <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-gray-400 group-hover:text-blue-600 transition-all mb-2">
                         <PlusCircle :size="24" />
                     </div>
-                    <p class="text-[10px] font-bold text-gray-400 group-hover:text-blue-600">upload document</p>
+                    <p class="text-[10px] font-bold text-gray-400 group-hover:text-blue-600">{{ t('upload document') }}</p>
                  </div>
               </div>
            </section>
@@ -708,12 +710,12 @@ definePageMeta({
 
             <!-- Quick Info -->
             <div class="grid grid-cols-2 md:grid-cols-4 bg-gray-50 border-b border-gray-100 text-[10px] font-bold text-gray-500">
-               <div class="p-6 text-center border-r border-gray-100">Starts: <div class="text-gray-900 text-sm mt-1 font-semibold">{{ form.startDate || 'tbd' }}</div></div>
-               <div class="p-6 text-center border-r border-gray-100">Ends: <div class="text-gray-900 text-sm mt-1 font-semibold">{{ form.endDate || 'tbd' }}</div></div>
-               <div class="p-6 text-center border-r border-gray-100">Year: <div class="text-gray-900 text-sm mt-1 font-semibold">{{ form.year }} / {{ form.month }}</div></div>
+               <div class="p-6 text-center border-r border-gray-100">{{ t('Starts:') }} <div class="text-gray-900 text-sm mt-1 font-semibold">{{ form.startDate || 'tbd' }}</div></div>
+               <div class="p-6 text-center border-r border-gray-100">{{ t('Ends:') }} <div class="text-gray-900 text-sm mt-1 font-semibold">{{ form.endDate || 'tbd' }}</div></div>
+               <div class="p-6 text-center border-r border-gray-100">{{ t('Year:') }} <div class="text-gray-900 text-sm mt-1 font-semibold">{{ form.year }} / {{ form.month }}</div></div>
                <div class="p-6 text-center flex flex-col items-center justify-center gap-1.5">
                   <div class="w-2 h-2 rounded-full bg-blue-500"></div>
-                  program preview
+                  {{ t('program preview') }}
                </div>
             </div>
 
@@ -731,7 +733,7 @@ definePageMeta({
 
                   <!-- Agenda -->
                   <div v-if="sectionId === 'agenda' && form.agenda.length" class="space-y-10">
-                     <h3 class="text-xs font-bold text-gray-400 text-center">Agenda</h3>
+                     <h3 class="text-xs font-bold text-gray-400 text-center">{{ t('Agenda') }}</h3>
                      <div class="space-y-4 max-w-2xl mx-auto">
                         <div v-for="(item, i) in form.agenda" :key="i" class="flex gap-6 p-8 bg-gray-50 rounded-2xl border border-gray-100">
                            <div class="w-12 h-12 bg-white border border-gray-100 text-gray-900 flex items-center justify-center rounded-xl font-bold text-sm shrink-0">{{ i + 1 }}</div>
@@ -746,7 +748,7 @@ definePageMeta({
 
                   <!-- Speakers -->
                   <div v-if="sectionId === 'speakers' && form.speakers.length" class="space-y-12">
-                     <h3 class="text-xs font-bold text-gray-400 text-center">Speakers</h3>
+                     <h3 class="text-xs font-bold text-gray-400 text-center">{{ t('Speakers') }}</h3>
                      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div v-for="(s, i) in form.speakers" :key="i" class="text-center space-y-4">
                            <div class="w-32 h-32 mx-auto rounded-2xl overflow-hidden border border-gray-100">
@@ -763,7 +765,7 @@ definePageMeta({
 
                   <!-- Documents -->
                   <div v-if="sectionId === 'documents' && form.uploadedDocumentFiles.length" class="space-y-8">
-                    <h3 class="text-xs font-bold text-gray-400 text-center">Resources</h3>
+                    <h3 class="text-xs font-bold text-gray-400 text-center">{{ t('Resources') }}</h3>
                     <div class="grid grid-cols-2 gap-4">
                       <div v-for="(doc, dIdx) in form.uploadedDocumentFiles" :key="dIdx" class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex items-center gap-4">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-gray-900 shadow-sm">
@@ -776,7 +778,7 @@ definePageMeta({
 
                   <!-- Gallery -->
                   <div v-if="sectionId === 'gallery' && form.bannerImages.length" class="space-y-8">
-                    <h3 class="text-xs font-bold text-gray-400 text-center">Gallery</h3>
+                    <h3 class="text-xs font-bold text-gray-400 text-center">{{ t('Gallery') }}</h3>
                     <div class="grid grid-cols-3 gap-3">
                       <div v-for="(img, gIdx) in form.bannerImages" :key="gIdx" class="aspect-video rounded-xl overflow-hidden">
                         <img :src="img" class="w-full h-full object-cover" />

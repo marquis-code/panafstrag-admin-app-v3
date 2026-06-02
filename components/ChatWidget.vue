@@ -14,7 +14,7 @@
         <div class="px-8 py-6 bg-indigo-600 text-white flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-            <h3 class="font-black text-lg">Community Chat</h3>
+            <h3 class="font-black text-lg">{{ t('Community Chat') }}</h3>
           </div>
           <button @click="isOpen = false" class="p-1 hover:bg-white/20 rounded-lg transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,6 +69,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { useChat } from '@/composables/useChat'
 import { useUser } from '@/composables/modules/auth/user'
 const { messages, connect, sendMessage, isConnected } = useChat()

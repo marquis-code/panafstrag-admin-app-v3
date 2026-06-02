@@ -11,7 +11,7 @@
     
     <div class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg py-1.5 shadow-lg opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
       <div class="px-3 py-2 border-b border-gray-100 bg-gray-50/50 mb-1">
-        <p class="text-[9px] font-bold uppercase tracking-widest text-gray-400">Language</p>
+        <p class="text-[9px] font-bold uppercase tracking-widest text-gray-400">{{ t('Language') }}</p>
       </div>
       <button 
         v-for="loc in locales" 

@@ -1,9 +1,9 @@
 <template>
   <div class="space-y-8 py-4">
     <div class="space-y-2 text-center lg:text-left">
-      <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Welcome Back</h2>
+      <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Welcome Back') }}</h2>
       <p class="text-gray-500 font-medium text-sm leading-relaxed max-w-sm">
-        Please enter your email and password to access the admin panel.
+        {{ t('Please enter your email and password to access the admin panel.') }}
       </p>
     </div>
 
@@ -29,11 +29,11 @@
       <div class="flex items-center justify-between">
         <label class="flex items-center gap-2 cursor-pointer group">
           <input type="checkbox"  class="custom-checkbox"/>
-          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider group-hover:text-blue-600 transition-colors">Remember me</span>
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider group-hover:text-blue-600 transition-colors">{{ t('Remember me') }}</span>
         </label>
         
         <NuxtLink to="/forgot-password" class="text-xs font-bold text-blue-600 uppercase tracking-wider hover:text-blue-700 transition-colors">
-          Forgot password?
+          {{ t('Forgot password?') }}
         </NuxtLink>
       </div>
 
@@ -44,7 +44,7 @@
       >
         <div v-if="authLoading" class="h-5 w-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
         <template v-else>
-          <span>Login</span>
+          <span>{{ t('Login') }}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
@@ -68,6 +68,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { reactive } from 'vue'
 import { useLogin } from '@/composables/modules/auth/useLogin'
 

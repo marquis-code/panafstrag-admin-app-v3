@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, onMounted } from 'vue'
 import { useEnquiry } from '@/composables/useEnquiry'
 
@@ -56,9 +58,9 @@ definePageMeta({
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Enquiries</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Enquiries') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          View and manage messages sent from the website contact form.
+          {{ t('View and manage messages sent from the website contact form.') }}
         </p>
       </div>
     </div>
@@ -81,11 +83,11 @@ definePageMeta({
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Date</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Sender</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Subject</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Status</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Date') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Sender') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Subject') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Status') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
@@ -138,14 +140,14 @@ definePageMeta({
       <div v-if="selectedEnquiry" class="space-y-6 p-4">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="space-y-1">
-            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Sender</span>
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ t('Sender') }}</span>
             <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
               <p class="text-sm font-bold text-gray-900">{{ selectedEnquiry.name }}</p>
               <p class="text-xs text-gray-500">{{ selectedEnquiry.email }}</p>
             </div>
           </div>
           <div class="space-y-1">
-            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Time Received</span>
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ t('Time Received') }}</span>
             <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
               <p class="text-sm text-gray-600">{{ new Date(selectedEnquiry.createdAt).toLocaleString('en-GB') }}</p>
             </div>
@@ -153,14 +155,14 @@ definePageMeta({
         </div>
 
         <div class="space-y-1">
-          <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Subject</span>
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ t('Subject') }}</span>
           <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
             <p class="text-sm font-bold text-blue-600">{{ selectedEnquiry.subject }}</p>
           </div>
         </div>
 
         <div class="space-y-1">
-          <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Message</span>
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ t('Message') }}</span>
           <div class="p-4 bg-white border border-gray-200 rounded-lg">
             <p class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">{{ selectedEnquiry.message }}</p>
           </div>
@@ -170,7 +172,7 @@ definePageMeta({
       <template #actions>
         <div class="flex items-center justify-end gap-3 w-full border-t border-gray-100 p-4">
           <button @click="showModal = false" class="px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-900">
-            Close
+            {{ t('Close') }}
           </button>
           <button 
             v-if="selectedEnquiry?.status === 'pending'" 
@@ -179,7 +181,7 @@ definePageMeta({
             class="px-6 py-2 bg-blue-600 text-white text-sm font-bold rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2"
           >
             <div v-if="actionLoading" class="h-4 w-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-            <span>Mark as Resolved</span>
+            <span>{{ t('Mark as Resolved') }}</span>
           </button>
         </div>
       </template>

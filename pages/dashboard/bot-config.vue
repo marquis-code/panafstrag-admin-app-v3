@@ -3,9 +3,9 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 pb-8">
       <div>
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Chat Assistant</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ t('Chat Assistant') }}</h1>
         <p class="text-gray-500 mt-2 text-sm font-medium">
-          Set up automatic replies and greetings for the website chat assistant.
+          {{ t('Set up automatic replies and greetings for the website chat assistant.') }}
         </p>
       </div>
       <button 
@@ -15,7 +15,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
-        Add New Reply
+        {{ t('Add New Reply') }}
       </button>
     </div>
 
@@ -42,11 +42,11 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Type</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Message</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Triggers</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Status</th>
-              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Type') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Message') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">{{ t('Triggers') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Status') }}</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">{{ t('Actions') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
@@ -77,11 +77,11 @@
               <td class="px-6 py-6 align-top">
                 <div class="space-y-3">
                   <div v-if="config.type === 'page_trigger'" class="flex items-center gap-2">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Path:</span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{{ t('Path:') }}</span>
                     <code class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{{ config.pagePath }}</code>
                   </div>
                   <div v-if="config.type === 'faq' && config.keywords?.length" class="space-y-1.5">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter block">Keywords:</span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter block">{{ t('Keywords:') }}</span>
                     <div class="flex flex-wrap gap-1.5">
                       <span v-for="kw in config.keywords" :key="kw" class="px-2 py-0.5 bg-gray-50 text-gray-500 text-[10px] font-bold rounded border border-gray-200">
                         {{ kw }}
@@ -163,7 +163,7 @@
 
       <template #actions>
         <div class="flex items-center justify-end gap-3 w-full border-t border-gray-100 p-4">
-          <button @click="showModal = false" class="px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-900">Cancel</button>
+          <button @click="showModal = false" class="px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-900">{{ t('Cancel') }}</button>
           <button 
             type="button" 
             @click="saveConfig" 
@@ -187,6 +187,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+const { t } = useI18n();
 import { ref, computed, onMounted } from 'vue'
 import { useCookie } from '#app'
 
