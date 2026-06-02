@@ -33,4 +33,3 @@ export { defineLazyHydrationComponent } from '#app/composables/lazy-hydration';
 export { useChat } from '../composables/useChat';
 export { useEnquiry } from '../composables/useEnquiry';
 export { useI18n } from '../composables/useI18n';
-export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';

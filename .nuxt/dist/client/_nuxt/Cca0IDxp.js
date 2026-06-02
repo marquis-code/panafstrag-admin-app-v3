@@ -1,0 +1,1 @@
+import{r as o}from"./Cg_j__lS.js";const s=()=>{const e=o((typeof window<"u"?localStorage.getItem("app-lang"):"en")||"en"),n=o([{code:"en",name:"English"},{code:"fr",name:"Français"},{code:"es",name:"Español"},{code:"pt",name:"Português"}]);return{locale:e,locales:n,setLocale:async a=>{e.value=a,typeof window<"u"&&localStorage.setItem("app-lang",a)}}};export{s as u};
