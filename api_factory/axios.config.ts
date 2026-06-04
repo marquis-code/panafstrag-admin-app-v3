@@ -1,9 +1,5 @@
 import axios, { type AxiosResponse } from "axios";
-import { useUser } from "@/composables/modules/auth/user";
 import { useCustomToast } from '@/composables/core/useCustomToast'
-const { showToast } = useCustomToast();
-
-const { token, logOut } = useUser();
 
 const $GATEWAY_ENDPOINT_WITHOUT_VERSION = import.meta.env
   .VITE_BASE_URL as string;
@@ -22,15 +18,11 @@ export const GATEWAY_ENDPOINT_V2 = axios.create({
 
 export const GATEWAY_ENDPOINT_WITH_AUTH = axios.create({
   baseURL: $GATEWAY_ENDPOINT,
-  headers: {
-    Authorization: `Bearer ${token.value}`,
-  },
 });
 
 export const GATEWAY_ENDPOINT_WITH_AUTH_FORM_DATA = axios.create({
   baseURL: $GATEWAY_ENDPOINT,
   headers: {
-    Authorization: `Bearer ${token.value}`,
     "Content-Type": "multipart/form-data",
   },
 });
@@ -40,9 +32,6 @@ export const GATEWAY_ENDPOINT_WITHOUT_VERSION = axios.create({
 });
 export const GATEWAY_ENDPOINT_WITHOUT_VERSION_WITH_AUTH = axios.create({
   baseURL: $GATEWAY_ENDPOINT_WITHOUT_VERSION,
-  headers: {
-    Authorization: `Bearer ${token.value}`,
-  },
 });
 export const IMAGE_UPLOAD_ENDPOINT = axios.create({
   baseURL: $IMAGE_UPLOAD_ENDPOINT,
@@ -62,10 +51,13 @@ const instanceArray = [
 
 instanceArray.forEach((instance) => {
   instance.interceptors.request.use((config: any) => {
-    if (token.value) {
-      config.headers.Authorization = `Bearer ${token.value}`;
+    if (typeof document !== 'undefined') {
+      const match = document.cookie.match(new RegExp('(^| )auth_token=([^;]+)'));
+      if (match && match[2]) {
+        config.headers.Authorization = `Bearer ${match[2]}`;
+      }
     }
-    const lang = localStorage.getItem('app-lang') || 'en';
+    const lang = typeof localStorage !== 'undefined' ? (localStorage.getItem('app-lang') || 'en') : 'en';
     if (config.headers) {
       config.headers['x-lang'] = lang;
     }
@@ -77,8 +69,14 @@ instanceArray.forEach((instance) => {
       return response;
     },
     (err: any) => {
+      let showToast = null;
+      if (typeof window !== 'undefined') {
+         showToast = useCustomToast().showToast;
+      }
+      const fireToast = (opts: any) => { if (showToast) showToast(opts); };
+
       if (typeof err.response === "undefined") {
-        showToast({
+        fireToast({
           title: "Error",
           message: "kindly check your network connection",
           toastType: "error",
@@ -91,8 +89,11 @@ instanceArray.forEach((instance) => {
       }
       if (err.response.status === 401) {
         console.log(err.response.data.error)
-        logOut();
-        showToast({
+        if (typeof window !== 'undefined') {
+          document.cookie = 'auth_token=; Max-Age=0; path=/';
+          window.location.href = '/login';
+        }
+        fireToast({
           title: "Error",
           message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
           toastType: "error",
@@ -104,7 +105,7 @@ instanceArray.forEach((instance) => {
         };
       } else if (statusCodeStartsWith(err.response.status, 4)) {
         if (err.response.data.message) {
-          showToast({
+          fireToast({
             title: "Error",
             message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
             toastType: "error",
@@ -116,7 +117,7 @@ instanceArray.forEach((instance) => {
           ...err.response,
         };
       } else if (err.response.status === 500) {
-        showToast({
+        fireToast({
           title: "Error",
           message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
           toastType: "error",
@@ -127,7 +128,7 @@ instanceArray.forEach((instance) => {
           ...err.response,
         };
       } else if (err.response.status === 409) {
-        showToast({
+        fireToast({
           title: "Error",
           message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
           toastType: "error",
