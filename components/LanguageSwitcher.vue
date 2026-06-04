@@ -29,6 +29,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from '#imports';
+import { refreshNuxtData } from '#imports';
 
 const { locale, locales: i18nLocales, setLocale } = useI18n();
 
@@ -39,6 +40,6 @@ const switchLanguage = async (code) => {
   if (currentLocale.value === code) return;
   await setLocale(code);
   localStorage.setItem('app-lang', code);
-  window.location.reload();
+  await refreshNuxtData();
 };
 </script>
