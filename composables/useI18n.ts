@@ -60,5 +60,14 @@ export const useI18n = () => {
     }
   };
 
-  return { locale, locales, setLocale, initLocale };
+  /**
+   * Translation function — currently a passthrough that returns the key as-is.
+   * When translation files are added, this should look up the key in the
+   * active locale's dictionary and fall back to the key itself.
+   */
+  const t = (key: string): string => {
+    return key;
+  };
+
+  return { locale, locales, setLocale, initLocale, t };
 };

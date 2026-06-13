@@ -28,10 +28,10 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useI18n } from '#imports';
+import { useI18n } from '@/composables/useI18n';
 import { refreshNuxtData } from '#imports';
 
-const { locale, locales: i18nLocales, setLocale } = useI18n();
+const { t, locale, locales: i18nLocales, setLocale } = useI18n();
 
 const locales = computed(() => i18nLocales.value || []);
 const currentLocale = computed(() => locale.value);
